@@ -1,0 +1,191 @@
+/* =====================================================
+   FULL IMPACT VIEW
+===================================================== */
+
+.impact-view {
+  height: calc(100vh - 52px);
+
+  background: #040a0d;
+
+  padding: 18px;
+
+  overflow: hidden;
+}
+
+.impact-view-header {
+  height: 75px;
+
+  border: 1px solid var(--line);
+
+  display: grid;
+  grid-template-columns: 220px 1fr 220px;
+
+  align-items: center;
+
+  padding: 0 16px;
+}
+
+.back-button {
+  width: max-content;
+
+  border: 1px solid #2c3b42;
+  background: #071015;
+
+  color: #9ba8ad;
+
+  height: 34px;
+
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 7px;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+}
+
+.impact-view-header > div:nth-child(2) {
+  text-align: center;
+}
+
+.impact-view-header span {
+  display: block;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 6px;
+  letter-spacing: 1.5px;
+  color: #65747b;
+}
+
+.impact-view-header strong {
+  display: block;
+
+  margin-top: 7px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.impact-confidence {
+  text-align: right;
+}
+
+.impact-confidence strong {
+  color: var(--amber);
+  font-size: 19px;
+}
+
+.impact-overview {
+  margin-top: 16px;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 10px;
+}
+
+.impact-overview .impact-card {
+  height: 100px;
+}
+
+.impact-analysis {
+  margin-top: 16px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  gap: 10px;
+}
+
+.impact-section {
+  min-height: 260px;
+
+  border: 1px solid var(--line);
+
+  padding: 22px;
+}
+
+.impact-section h2 {
+  margin: 16px 0;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.impact-section p {
+  max-width: 600px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  line-height: 1.8;
+
+  color: #718087;
+}
+
+.priority-critical {
+  margin-top: 20px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 24px;
+
+  color: var(--amber);
+}
+
+.impact-bottom {
+  height: 65px;
+
+  margin-top: 10px;
+
+  border: 1px solid var(--line);
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 0 20px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 7px;
+  color: #5f6e75;
+}
+
+.impact-bottom strong {
+  color: #d5dfe2;
+}
+
+.impact-bottom span:last-child {
+  margin-left: auto;
+}
+
+/* =====================================================
+   RESPONSIVE HEIGHT PROTECTION
+===================================================== */
+
+@media (max-height: 760px) {
+  .workspace {
+    height: calc(100vh - 52px - 265px);
+  }
+
+  .intel-panel {
+    height: 265px;
+  }
+
+  .intel-content {
+    height: 95px;
+  }
+
+  .event-timeline {
+    height: 75px;
+  }
+
+  .detection-layout {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}

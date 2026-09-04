@@ -1,0 +1,342 @@
+/* =====================================================
+   MAP
+===================================================== */
+
+.map-area {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  background: #0b1114;
+}
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background: #0b1114;
+  font-family: "Inter", sans-serif;
+}
+
+/* Darken chart map while preserving readable labels. */
+
+.map-area .leaflet-tile {
+  filter: brightness(0.58) saturate(0.55) contrast(1.12);
+}
+
+/* Satellite should stay photographic. */
+
+.map-area.satellite .leaflet-tile {
+  filter: brightness(0.72) saturate(0.85) contrast(1.08);
+}
+
+.leaflet-control-attribution {
+  background: rgba(3, 8, 11, 0.65) !important;
+  color: #53636b !important;
+  font-size: 7px !important;
+}
+
+.leaflet-control-attribution a {
+  color: #66777f !important;
+}
+
+/* =====================================================
+   MAP CONTROLS
+===================================================== */
+
+.map-controls {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 500;
+}
+
+.map-switch {
+  display: flex;
+
+  border: 1px solid #283840;
+  background: rgba(5, 13, 17, 0.94);
+}
+
+.map-switch button {
+  height: 34px;
+
+  padding: 0 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  border: 0;
+  border-right: 1px solid #26363d;
+
+  background: transparent;
+  color: #718088;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8px;
+  letter-spacing: 1px;
+
+  cursor: pointer;
+}
+
+.map-switch button:last-child {
+  border-right: 0;
+}
+
+.map-switch button.active {
+  background: #0c181d;
+  color: #d9e2e5;
+}
+
+.map-switch button.active:first-child {
+  box-shadow: inset 0 -2px 0 var(--cyan);
+}
+
+.map-switch button.active:last-child {
+  box-shadow: inset 0 -2px 0 var(--amber);
+}
+
+.wind-indicator {
+  position: absolute;
+  right: 16px;
+  top: 59px;
+
+  z-index: 500;
+
+  height: 35px;
+
+  padding: 0 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  border: 1px solid #25353c;
+  background: rgba(4, 11, 15, 0.94);
+
+  color: var(--cyan);
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8px;
+}
+
+.wind-indicator strong {
+  color: #a9b6ba;
+}
+
+.wind-indicator span:last-child {
+  color: #9ca9ae;
+}
+
+/* =====================================================
+   MAP LABELS
+===================================================== */
+
+.map-incident-label {
+  position: absolute;
+  left: 17px;
+  top: 17px;
+
+  z-index: 500;
+
+  width: 160px;
+
+  padding: 13px 14px;
+
+  border: 1px solid #26373e;
+  background: rgba(3, 10, 14, 0.94);
+}
+
+.label-kicker {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 7px;
+  letter-spacing: 1.5px;
+  color: #63727a;
+}
+
+.label-id {
+  margin-top: 9px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 17px;
+  letter-spacing: 1.5px;
+}
+
+.label-coords {
+  margin-top: 7px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 7px;
+  color: var(--amber);
+}
+
+/* Actual geographic popup labels. */
+
+.spill-label-icon,
+.source-label-icon {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.spill-label {
+  width: 150px;
+  min-height: 68px;
+
+  padding: 10px 12px;
+
+  border: 1px solid #bd7900;
+  background: rgba(4, 10, 13, 0.96);
+
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+
+  position: relative;
+}
+
+.spill-label::before {
+  content: "";
+
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+
+  width: 12px;
+  height: 12px;
+
+  transform: translateX(-50%) rotate(45deg);
+
+  background: #040a0d;
+  border-right: 1px solid #bd7900;
+  border-bottom: 1px solid #bd7900;
+}
+
+.spill-label-kicker {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: var(--amber);
+}
+
+.spill-warning {
+  font-size: 12px;
+}
+
+.spill-label-area {
+  margin-top: 6px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 16px;
+  color: #e8edf0;
+}
+
+.spill-label-time {
+  margin-top: 4px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 6px;
+  color: #65747b;
+}
+
+.source-label {
+  width: 175px;
+
+  padding: 9px 11px;
+
+  border: 1px solid #1d6770;
+  background: rgba(4, 13, 17, 0.96);
+}
+
+.source-kicker {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 6px;
+  letter-spacing: 1.4px;
+  color: #64777e;
+}
+
+.source-row {
+  margin-top: 6px;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8px;
+  color: #d3dfe2;
+}
+
+.source-row strong {
+  margin-left: auto;
+  color: var(--amber);
+}
+
+.source-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cyan);
+}
+
+/* =====================================================
+   LEGEND
+===================================================== */
+
+.map-legend {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+
+  z-index: 500;
+
+  padding: 10px 13px;
+
+  border: 1px solid #26363d;
+  background: rgba(4, 11, 15, 0.93);
+}
+
+.legend-line {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  height: 16px;
+
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 7px;
+  letter-spacing: 1px;
+  color: #78868c;
+}
+
+.legend-symbol {
+  width: 21px;
+  height: 2px;
+  display: block;
+}
+
+.legend-symbol.oil {
+  background: var(--amber);
+}
+
+.legend-symbol.ais {
+  background: var(--cyan);
+}
+
+.legend-symbol.forecast {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--amber) 0 5px,
+    transparent 5px 9px
+  );
+}
+
+.legend-symbol.source {
+  height: 7px;
+  background: transparent;
+  border: 1px dashed var(--amber);
+}
+
+/* =====================================================
+   INTELLIGENCE PANEL
+===================================================== */
