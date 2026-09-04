@@ -1,16 +1,50 @@
-# React + Vite
+# Datum SIH 2026
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> **Satellite imagery + AIS to detect oil spills and identify responsible vessels**
 
-Currently, two official plugins are available:
+[![SIH](https://img.shields.io/badge/Smart%20India%20Hackathon-2026-blue)](https://www.sih.gov.in/)
+[![Project](https://img.shields.io/badge/Problem%20ID-SIH26143-black)]()
+[![Status](https://img.shields.io/badge/Status-In%20Development-orange)]()
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## SIH26143
 
-## React Compiler
+**Problem Statement:** 
+Satellite imagery + AIS to detect oil spills and identify responsible vessel
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This project aims to develop a system that combines **satellite imagery** with **Automatic Identification System (AIS)** vessel data to detect oil spills, track their spatial and temporal characteristics, and identify the vessel(s) potentially responsible.
 
-## Expanding the Oxlint configuration
+## Team
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+| Member |
+|---|
+| Ridhviraj |
+| Dan |
+| Shivamsh |
+| Agrajeet |
+| Bhuvi |
+| Gaurav |
+
+## Overview
+
+The system will integrate:
+
+- **Satellite imagery** for detecting and mapping potential oil spills
+- **AIS data** for vessel identification and movement tracking
+- **Geospatial analysis** to correlate spills with nearby vessel trajectories
+- **Spill attribution** to identify likely responsible vessels
+- **Data visualization** for investigation and decision-making
+
+## Repository
+
+```text
+Datum-SIH/
+├── src/        # Core implementation
+├── tests/      # Tests
+├── docs/       # Project documentation
+└── README.md
+
+## Development
+
+This repository contains the engineering work for SIH26143 under Datum Collective.
+
+The project is developed collaboratively through GitHub, with changes reviewed through pull requests.
