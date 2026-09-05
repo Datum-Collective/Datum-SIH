@@ -76,12 +76,12 @@
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .brand-mark {
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
 
   display: flex;
   align-items: center;
@@ -111,8 +111,8 @@
 
 .brand-name {
   font-family: var(--font-ui);
-  font-size: 17px;
-  line-height: 17px;
+  font-size: 20px;
+  line-height: 20px;
   font-weight: 700;
   letter-spacing: 0.16em;
 
@@ -123,8 +123,8 @@
   margin-top: 3px;
 
   font-family: var(--font-system);
-  font-size: 7px;
-  line-height: 9px;
+  font-size: 8px;
+  line-height: 10px;
   font-weight: 600;
   letter-spacing: 0.12em;
 
@@ -169,10 +169,10 @@
 
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 11px;
 
   font-family: var(--font-mono);
-  font-size: 9px;
+  font-size: 11px;
   line-height: 1;
 
   white-space: nowrap;
@@ -185,8 +185,8 @@
 }
 
 .live-dot {
-  width: 7px;
-  height: 7px;
+  width: 8px;
+  height: 8px;
 
   border-radius: 50%;
 

@@ -1,4 +1,4 @@
-import { Activity, Waves } from "lucide-react";
+import { Waves } from "lucide-react";
 
 export default function TopBar({ impactView = false }) {
   return (
@@ -42,21 +42,6 @@ export default function TopBar({ impactView = false }) {
       </div>
 
 
-      <div className="top-actions">
-
-        <span>OPERATIONS</span>
-
-        <button aria-label="System activity">
-          <Activity size={15} />
-        </button>
-
-        {!impactView && (
-          <button aria-label="Menu">
-            <span className="hamburger">☰</span>
-          </button>
-        )}
-
-      </div>
 
     </header>
   );
