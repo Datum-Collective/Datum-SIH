@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import "leaflet/dist/leaflet.css";
+import "./styles/osiris.css";
 import "./App.css";
 import "./styles/oil-sentinel-theme.css";
 

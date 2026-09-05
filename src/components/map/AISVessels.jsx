@@ -64,57 +64,64 @@ function escapeHtml(value) {
 
 function buildPopupHtml(vessel) {
   return `
-    <div class="osiris-vessel-popup">
-      <div class="vessel-popup-kicker">
-        AIS VESSEL
+    <div class="osiris-ais-card">
+
+      <div class="osiris-ais-card-header">
+        <div class="osiris-ais-card-type">
+          <span class="osiris-ais-card-dot"></span>
+          AIS VESSEL
+        </div>
       </div>
 
-      <div class="vessel-popup-name">
+      <div class="osiris-ais-card-name">
         ${escapeHtml(vessel.name)}
       </div>
 
-      <div class="vessel-popup-mmsi">
+      <div class="osiris-ais-card-mmsi">
         MMSI ${escapeHtml(vessel.mmsi)}
       </div>
 
-      <div class="vessel-popup-divider"></div>
+      <div class="osiris-ais-card-rule"></div>
 
-      <div class="vessel-popup-row">
-        <span>POSITION</span>
-        <strong>
-          ${formatNumber(vessel.lat, 4)}°
-          ${formatNumber(vessel.lng, 4)}°
-        </strong>
-      </div>
+      <div class="osiris-ais-card-data">
 
-      <div class="vessel-popup-row">
-        <span>SPEED</span>
-        <strong>
-          ${
-            Number.isFinite(vessel.speed)
-              ? `${formatNumber(vessel.speed, 1)} kn`
-              : "—"
-          }
-        </strong>
-      </div>
+        <div class="osiris-ais-card-row">
+          <span>POSITION</span>
+          <strong>
+            ${formatNumber(vessel.lat, 4)}°
+            ${formatNumber(vessel.lng, 4)}°
+          </strong>
+        </div>
 
-      <div class="vessel-popup-row">
-        <span>COURSE</span>
-        <strong>
-          ${formatAngle(vessel.course)}
-        </strong>
-      </div>
+        <div class="osiris-ais-card-row">
+          <span>SPEED</span>
+          <strong>
+            ${
+              Number.isFinite(vessel.speed)
+                ? `${formatNumber(vessel.speed, 1)} kn`
+                : "—"
+            }
+          </strong>
+        </div>
 
-      <div class="vessel-popup-row">
-        <span>HEADING</span>
-        <strong>
-          ${formatAngle(vessel.heading)}
-        </strong>
+        <div class="osiris-ais-card-row">
+          <span>COURSE</span>
+          <strong>
+            ${formatAngle(vessel.course)}
+          </strong>
+        </div>
+
+        <div class="osiris-ais-card-row">
+          <span>HEADING</span>
+          <strong>
+            ${formatAngle(vessel.heading)}
+          </strong>
+        </div>
+
       </div>
     </div>
   `;
 }
-
 export default function AISVessels({ visible = true }) {
   const map = useMap();
 
