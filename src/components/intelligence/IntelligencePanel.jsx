@@ -5,11 +5,42 @@ import ForecastPanel from "./ForecastPanel";
 import ImpactPanel from "./ImpactPanel";
 import Timeline from "./Timeline";
 
+const tabs = [
+  ["detection", "DETECTION"],
+  ["vessels", "VESSELS"],
+  ["forecast", "FORECAST"],
+  ["impact", "IMPACT"],
+];
+
 function RelationshipNode({ label, active }) {
   return (
     <div className={`relationship-node ${active ? "active" : ""}`}>
       <span className="relationship-dot" />
-      {label}
+      <span>{label}</span>
+    </div>
+  );
+}
+
+function RelationshipChain() {
+  return (
+    <div className="relationship">
+      <RelationshipNode label="SPILL" active />
+
+      <ChevronRight />
+
+      <RelationshipNode label="SOURCE" />
+
+      <ChevronRight />
+
+      <RelationshipNode label="VESSEL" />
+
+      <ChevronRight />
+
+      <RelationshipNode label="TRAJECTORY" />
+
+      <ChevronRight />
+
+      <RelationshipNode label="IMPACT" />
     </div>
   );
 }
@@ -24,147 +55,121 @@ export default function IntelligencePanel({
   setShowImpact,
 }) {
   return (
-      <section className="intel-panel">
+    <section className="intel-panel">
+      {/* =====================================================
+          INCIDENT HEADER
+          ===================================================== */}
 
-        <div className="intel-header">
-
-          <div className="active-incident">
-
-            <div className="alert-icon">
-              <AlertTriangle size={17} />
-            </div>
-
-            <div>
-
-              <div className="intel-kicker">
-                ACTIVE INCIDENT
-              </div>
-
-              <div className="intel-title-row">
-
-                <strong>{incident.id}</strong>
-
-                <span>{incident.location}</span>
-
-                <i />
-
-                <span>{incident.time}</span>
-
-              </div>
-
-            </div>
+      <div className="intel-header">
+        <div className="active-incident">
+          <div className="alert-icon">
+            <AlertTriangle size={16} strokeWidth={1.8} />
           </div>
 
-          <div className="confidence">
+          <div className="active-incident-copy">
+            <div className="intel-kicker">
+              ACTIVE ENVIRONMENTAL INCIDENT
+            </div>
 
-            <span>DETECTION CONFIDENCE</span>
+            <div className="intel-title-row">
+              <strong>{incident.id}</strong>
 
+              <span className="intel-location">
+                {incident.location}
+              </span>
+
+              <i />
+
+              <span className="intel-time">
+                DETECTED {incident.time}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="confidence">
+          <span>DETECTION CONFIDENCE</span>
+
+          <div className="confidence-value">
             <strong>{incident.confidence}%</strong>
-
           </div>
-
         </div>
+      </div>
 
-        {/* RELATIONSHIP */}
+      {/* =====================================================
+          RELATIONSHIP CHAIN
+          ===================================================== */}
 
-        <div className="relationship">
+      <RelationshipChain />
 
-          <RelationshipNode
-            active
-            label="SPILL"
-          />
+      {/* =====================================================
+          ANALYSIS TABS
+          ===================================================== */}
 
-          <ChevronRight />
-
-          <RelationshipNode label="SOURCE" />
-
-          <ChevronRight />
-
-          <RelationshipNode label="VESSEL" />
-
-          <ChevronRight />
-
-          <RelationshipNode label="TRAJECTORY" />
-
-          <ChevronRight />
-
-          <RelationshipNode label="IMPACT" />
-
-        </div>
-
-        {/* TABS */}
-
-        <div className="intel-tabs">
-
-          {[
-            "detection",
-            "vessels",
-            "forecast",
-            "impact",
-          ].map((tab) => (
-
+      <div className="intel-tabs">
+        <div className="intel-tabs-inner">
+          {tabs.map(([tab, label]) => (
             <button
+              type="button"
               key={tab}
-              className={
-                activeTab === tab ? "active" : ""
-              }
+              className={activeTab === tab ? "active" : ""}
               onClick={() => setActiveTab(tab)}
             >
-              {tab.toUpperCase()}
+              {label}
             </button>
-
           ))}
-
         </div>
 
-        {/* CONTENT */}
-
-        <div className="intel-content">
-
-          {activeTab === "detection" && (
-            <DetectionPanel
-              incident={incident}
-              onEvidence={() =>
-                setShowEvidence(true)
-              }
-            />
-          )}
-
-          {activeTab === "vessels" && (
-            <VesselPanel
-              incident={incident}
-              onEvidence={() =>
-                setShowEvidence(true)
-              }
-            />
-          )}
-
-          {activeTab === "forecast" && (
-            <ForecastPanel
-              incident={incident}
-              timelineStep={timelineStep}
-              setTimelineStep={setTimelineStep}
-            />
-          )}
-
-          {activeTab === "impact" && (
-            <ImpactPanel
-              incident={incident}
-              onOpen={() => setShowImpact(true)}
-            />
-          )}
-
+        <div className="tab-context">
+          CASE {incident.id}
         </div>
+      </div>
 
-        {/* TIMELINE */}
+      {/* =====================================================
+          CONTENT
+          ===================================================== */}
 
-        <Timeline
-          incident={incident}
-          timelineStep={timelineStep}
-          setTimelineStep={setTimelineStep}
-          onImpact={() => setShowImpact(true)}
-        />
+      <div className="intel-content">
+        {activeTab === "detection" && (
+          <DetectionPanel
+            incident={incident}
+            onEvidence={() => setShowEvidence(true)}
+          />
+        )}
 
-      </section>
+        {activeTab === "vessels" && (
+          <VesselPanel
+            incident={incident}
+            onEvidence={() => setShowEvidence(true)}
+          />
+        )}
+
+        {activeTab === "forecast" && (
+          <ForecastPanel
+            incident={incident}
+            timelineStep={timelineStep}
+            setTimelineStep={setTimelineStep}
+          />
+        )}
+
+        {activeTab === "impact" && (
+          <ImpactPanel
+            incident={incident}
+            onOpen={() => setShowImpact(true)}
+          />
+        )}
+      </div>
+
+      {/* =====================================================
+          TIMELINE
+          ===================================================== */}
+
+      <Timeline
+        incident={incident}
+        timelineStep={timelineStep}
+        setTimelineStep={setTimelineStep}
+        onImpact={() => setShowImpact(true)}
+      />
+    </section>
   );
 }

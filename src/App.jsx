@@ -1,7 +1,10 @@
 import { useMemo, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import "./App.css";
+import "./styles/oil-sentinel-theme.css";
+
 import { incidents } from "./data/incidents";
+
 import TopBar from "./components/layout/TopBar";
 import IncidentRail from "./components/layout/IncidentRail";
 import MapView from "./components/map/MapView";
@@ -27,13 +30,20 @@ export default function App() {
     setTimelineStep(0);
   };
 
-  const mapCenter = useMemo(() => [incident.lat, incident.lng], [incident]);
+  const mapCenter = useMemo(
+    () => [incident.lat, incident.lng],
+    [incident]
+  );
 
   if (showImpact) {
     return (
       <div className="app">
         <TopBar impactView />
-        <ImpactView incident={incident} onBack={() => setShowImpact(false)} />
+
+        <ImpactView
+          incident={incident}
+          onBack={() => setShowImpact(false)}
+        />
       </div>
     );
   }
@@ -41,8 +51,14 @@ export default function App() {
   return (
     <div className="app">
       <TopBar />
+
       <main className="workspace">
-        <IncidentRail incidents={incidents} incident={incident} selectIncident={selectIncident} />
+        <IncidentRail
+          incidents={incidents}
+          incident={incident}
+          selectIncident={selectIncident}
+        />
+
         <MapView
           incident={incident}
           incidents={incidents}
@@ -52,6 +68,7 @@ export default function App() {
           mapCenter={mapCenter}
         />
       </main>
+
       <IntelligencePanel
         incident={incident}
         activeTab={activeTab}
@@ -61,6 +78,7 @@ export default function App() {
         setShowEvidence={setShowEvidence}
         setShowImpact={setShowImpact}
       />
+
       {showEvidence && (
         <EvidenceModal
           incident={incident}

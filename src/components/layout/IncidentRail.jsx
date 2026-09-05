@@ -1,108 +1,134 @@
-import { Navigation, Satellite, Waves, Wind } from "lucide-react";
+import {
+  Navigation,
+  Satellite,
+  Waves,
+  Wind,
+} from "lucide-react";
 
 function DataStream({ icon, name, status }) {
   return (
     <div className="data-stream">
-      {icon}
-      <span>{name}</span>
-      <strong>{status}</strong>
+      <span className="data-stream-icon">
+        {icon}
+      </span>
+
+      <span className="data-stream-name">
+        {name}
+      </span>
+
+      <span className="data-stream-status">
+        <span className="stream-dot" />
+        {status}
+      </span>
     </div>
   );
 }
 
-export default function IncidentRail({ incidents, incident, selectIncident }) {
+function IncidentItem({ item, selected, onClick }) {
   return (
-        <aside className="incident-rail">
+    <button
+      type="button"
+      className={`incident-item ${selected ? "selected" : ""}`}
+      onClick={onClick}
+    >
+      <div className="incident-top">
+        <span className={`severity-dot ${item.severity}`} />
 
-          <div className="rail-heading">
-            <span>ACTIVE INCIDENTS</span>
-            <strong>{incidents.length}</strong>
-          </div>
+        <span className="incident-id">
+          {item.id}
+        </span>
 
-          <div className="incident-list">
+        <span className={`severity ${item.severity}`}>
+          {item.severity}
+        </span>
+      </div>
 
-            {incidents.map((item) => (
-              <button
-                key={item.id}
-                className={`incident-item ${
-                  incident.id === item.id ? "selected" : ""
-                }`}
-                onClick={() => selectIncident(item)}
-              >
-                <div className="incident-top">
+      <div className="incident-location">
+        {item.location}
+      </div>
 
-                  <span
-                    className={`severity-dot ${item.severity}`}
-                  />
+      <div className="incident-meta">
+        <span>
+          DETECTED&nbsp;&nbsp;{item.time}
+        </span>
 
-                  <span className="incident-id">
-                    {item.id}
-                  </span>
+        <strong>
+          {item.confidence}%
+        </strong>
+      </div>
+    </button>
+  );
+}
 
-                  <span
-                    className={`severity ${item.severity}`}
-                  >
-                    {item.severity}
-                  </span>
-                </div>
+export default function IncidentRail({
+  incidents,
+  incident,
+  selectIncident,
+}) {
+  return (
+    <aside className="incident-rail">
+      <div className="rail-section-heading">
+        <span>ACTIVE INCIDENTS</span>
 
-                <div className="incident-location">
-                  {item.location}
-                </div>
+        <span className="incident-count">
+          {String(incidents.length).padStart(2, "0")}
+        </span>
+      </div>
 
-                <div className="incident-meta">
-                  <span>Detected {item.time}</span>
-                  <strong>{item.confidence}%</strong>
-                </div>
-              </button>
-            ))}
+      <div className="incident-list">
+        {incidents.map((item) => (
+          <IncidentItem
+            key={item.id}
+            item={item}
+            selected={incident.id === item.id}
+            onClick={() => selectIncident(item)}
+          />
+        ))}
+      </div>
 
-          </div>
+      <div className="streams-section">
+        <div className="rail-section-heading">
+          <span>DATA SOURCES</span>
+        </div>
 
-          <div className="data-streams">
+        <div className="data-streams">
+          <DataStream
+            icon={<Satellite size={13} strokeWidth={1.7} />}
+            name="SENTINEL-1 SAR"
+            status="LIVE"
+          />
 
-            <div className="rail-heading">
-              <span>DATA STREAMS</span>
-            </div>
+          <DataStream
+            icon={<Satellite size={13} strokeWidth={1.7} />}
+            name="SENTINEL-2 OPTICAL"
+            status="LIVE"
+          />
 
-            <DataStream
-              icon={<Satellite size={13} />}
-              name="SENTINEL-1 SAR"
-              status="LIVE"
-            />
+          <DataStream
+            icon={<Navigation size={13} strokeWidth={1.7} />}
+            name="AIS"
+            status="LIVE"
+          />
 
-            <DataStream
-              icon={<Satellite size={13} />}
-              name="SENTINEL-2 OPTICAL"
-              status="LIVE"
-            />
+          <DataStream
+            icon={<Wind size={13} strokeWidth={1.7} />}
+            name="METEO / ECMWF"
+            status="LIVE"
+          />
 
-            <DataStream
-              icon={<Navigation size={13} />}
-              name="AIS"
-              status="LIVE"
-            />
+          <DataStream
+            icon={<Waves size={13} strokeWidth={1.7} />}
+            name="OCEAN CURRENT"
+            status="LIVE"
+          />
 
-            <DataStream
-              icon={<Wind size={13} />}
-              name="METEO (ECMWF)"
-              status="LIVE"
-            />
-
-            <DataStream
-              icon={<Waves size={13} />}
-              name="OCEAN CURRENT"
-              status="LIVE"
-            />
-
-            <DataStream
-              icon={<Wind size={13} />}
-              name="WIND FIELD"
-              status="LIVE"
-            />
-
-          </div>
-
-        </aside>
+          <DataStream
+            icon={<Wind size={13} strokeWidth={1.7} />}
+            name="WIND FIELD"
+            status="LIVE"
+          />
+        </div>
+      </div>
+    </aside>
   );
 }

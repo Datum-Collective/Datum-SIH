@@ -1,0 +1,1084 @@
+/* =========================================================
+   OSIRIS
+   Maritime Environmental Intelligence
+   Light workstation interface
+========================================================= */
+
+:root {
+  --os-bg: #d9e2e6;
+  --os-surface: #edf2f4;
+  --os-surface-light: #f8fafb;
+  --os-surface-dark: #c7d2d7;
+
+  --os-border: #a9b8bf;
+  --os-border-light: #c8d3d8;
+  --os-border-dark: #8799a2;
+
+  --os-text: #30434d;
+  --os-muted: #71828b;
+  --os-dim: #91a0a7;
+
+  --os-blue: #277ba3;
+  --os-blue-light: #d7ebf4;
+
+  --os-cyan: #1798ad;
+  --os-green: #269b78;
+  --os-amber: #d38a17;
+  --os-red: #d34b4b;
+
+  --os-ui:
+    "Avenir Next",
+    Avenir,
+    "Segoe UI",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  --os-mono:
+    Monaco,
+    "SFMono-Regular",
+    Consolas,
+    monospace;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--os-bg);
+}
+
+body {
+  overflow: hidden;
+  font-family: var(--os-ui);
+  color: var(--os-text);
+  background:
+    linear-gradient(
+      180deg,
+      #f5f8f9 0%,
+      #d7e1e5 100%
+    );
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+
+/* =========================================================
+   APPLICATION
+========================================================= */
+
+.app {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+
+  min-width: 1100px;
+  min-height: 650px;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      #edf2f4 0%,
+      #d6e0e4 100%
+    );
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar {
+  flex: 0 0 58px;
+
+  width: 100%;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+
+  padding: 0 16px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fbfcfd 0%,
+      #e7edef 44%,
+      #ced9de 100%
+    );
+
+  border-top: 1px solid #ffffff;
+  border-bottom: 1px solid #9cabb3;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.9),
+    0 2px 7px rgba(45,65,75,0.18);
+
+  position: relative;
+  z-index: 1000;
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+  width: 330px;
+  min-width: 330px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+}
+
+.brand-mark {
+  width: 36px;
+  height: 36px;
+
+  flex: 0 0 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  border: 1px solid #8ba6b3;
+
+  color: #ffffff;
+
+  background:
+    radial-gradient(
+      circle at 32% 25%,
+      #ffffff 0%,
+      #cce7f0 27%,
+      #76b1c9 62%,
+      #397993 100%
+    );
+
+  box-shadow:
+    inset 0 1px 2px rgba(255,255,255,0.95),
+    0 1px 3px rgba(40,60,70,0.22);
+}
+
+.brand-mark svg {
+  filter:
+    drop-shadow(
+      0 1px 1px rgba(30,60,70,0.55)
+    );
+}
+
+.brand-name {
+  color: #273d48;
+
+  font-family: var(--os-mono);
+
+  font-size: 16px;
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 4px;
+
+  text-shadow:
+    0 1px 0 #ffffff;
+}
+
+.brand-name span {
+  color: var(--os-blue);
+}
+
+.brand-subtitle {
+  margin-top: 4px;
+
+  color: #788a93;
+
+  font-family: var(--os-mono);
+
+  font-size: 6px;
+
+  letter-spacing: 1.5px;
+}
+
+
+/* =========================================================
+   SYSTEM STATUS
+========================================================= */
+
+.system-status {
+  flex: 1;
+
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  color: #73848c;
+
+  font-family: var(--os-mono);
+
+  font-size: 8px;
+  letter-spacing: 1.2px;
+}
+
+.system-status i {
+  width: 1px;
+  height: 17px;
+
+  background: #aab8be;
+
+  box-shadow:
+    1px 0 0 #ffffff;
+}
+
+.system-status .live-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: var(--os-green);
+
+  border: 1px solid #168263;
+
+  box-shadow:
+    0 0 0 2px rgba(38,155,120,0.12),
+    inset 0 1px 1px rgba(255,255,255,0.9);
+}
+
+
+/* =========================================================
+   TOP ACTIONS
+========================================================= */
+
+.top-actions {
+  width: 330px;
+  min-width: 330px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 7px;
+
+  color: #697b84;
+
+  font-family: var(--os-mono);
+
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.top-actions button {
+  width: 33px;
+  height: 31px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #9eafb7;
+  border-radius: 4px;
+
+  color: #60737d;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fbfcfd,
+      #d8e2e6
+    );
+
+  box-shadow:
+    inset 0 1px 0 #ffffff,
+    0 1px 2px rgba(40,60,70,0.14);
+
+  cursor: pointer;
+}
+
+.top-actions button:hover {
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #e5ecef
+    );
+}
+
+.top-actions button:active {
+  background:
+    linear-gradient(
+      180deg,
+      #cbd7dc,
+      #e5ecef
+    );
+
+  box-shadow:
+    inset 0 1px 3px rgba(40,60,70,0.18);
+}
+
+
+/* =========================================================
+   THE CRITICAL PART:
+   WORKSPACE MUST BE A REAL 2-COLUMN GRID
+========================================================= */
+
+.workspace {
+  flex: 1 1 auto;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  display: grid !important;
+
+  grid-template-columns:
+    248px
+    minmax(0, 1fr) !important;
+
+  grid-template-rows:
+    minmax(0, 1fr);
+
+  overflow: hidden;
+
+  background: #d5e0e4;
+
+  border-bottom: 1px solid #9caeb6;
+}
+
+
+/* =========================================================
+   LEFT INCIDENT RAIL
+========================================================= */
+
+.incident-rail {
+  grid-column: 1;
+  grid-row: 1;
+
+  width: 248px;
+  min-width: 248px;
+  max-width: 248px;
+
+  height: 100%;
+  min-height: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f0f4f6 0%,
+      #dce5e8 100%
+    );
+
+  border-right: 1px solid #a4b4bc;
+
+  box-shadow:
+    2px 0 6px rgba(40,60,70,0.12);
+
+  z-index: 10;
+}
+
+
+/* =========================================================
+   INCIDENT HEADER
+========================================================= */
+
+.rail-heading {
+  width: 100%;
+  height: 40px;
+
+  padding: 0 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fbfcfd,
+      #dce5e9
+    );
+
+  border-bottom: 1px solid #b2c0c6;
+
+  color: #647780;
+
+  font-family: var(--os-mono);
+
+  font-size: 8px;
+  letter-spacing: 1.3px;
+}
+
+.rail-heading strong {
+  color: var(--os-blue);
+}
+
+
+/* =========================================================
+   INCIDENT LIST
+========================================================= */
+
+.incident-list {
+  width: 100%;
+}
+
+.incident-item {
+  position: relative;
+
+  width: 100%;
+  min-height: 96px;
+
+  padding: 14px;
+
+  display: block;
+
+  border: 0;
+  border-bottom: 1px solid #bdc9ce;
+
+  text-align: left;
+
+  color: var(--os-text);
+
+  background:
+    linear-gradient(
+      180deg,
+      #f2f5f6,
+      #dfe7ea
+    );
+
+  cursor: pointer;
+}
+
+.incident-item:hover {
+  background:
+    linear-gradient(
+      180deg,
+      #f9fbfc,
+      #e1edf1
+    );
+}
+
+.incident-item.selected {
+  background:
+    linear-gradient(
+      180deg,
+      #e8f5fa,
+      #c8e4ef
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.95);
+}
+
+.incident-item.selected::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  width: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #57a9d0,
+      #23739a
+    );
+}
+
+
+/* =========================================================
+   INCIDENT CONTENT
+========================================================= */
+
+.incident-top {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+}
+
+.severity-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  box-shadow:
+    inset 0 1px 1px rgba(255,255,255,0.8),
+    0 1px 2px rgba(0,0,0,0.15);
+}
+
+.severity-dot.HIGH {
+  background: var(--os-red);
+}
+
+.severity-dot.MED {
+  background: var(--os-amber);
+}
+
+.severity-dot.LOW {
+  background: var(--os-green);
+}
+
+.incident-id {
+  color: #344b56;
+
+  font-family: var(--os-mono);
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 1px;
+}
+
+.severity {
+  margin-left: auto;
+
+  font-family: var(--os-mono);
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 1px;
+}
+
+.severity.HIGH {
+  color: var(--os-red);
+}
+
+.severity.MED {
+  color: #bb7c0d;
+}
+
+.severity.LOW {
+  color: #25886d;
+}
+
+.incident-location {
+  margin-top: 12px;
+
+  color: #687b84;
+
+  font-family: var(--os-mono);
+
+  font-size: 9px;
+}
+
+.incident-meta {
+  margin-top: 10px;
+
+  display: flex;
+  justify-content: space-between;
+
+  color: #87969d;
+
+  font-family: var(--os-mono);
+
+  font-size: 7px;
+}
+
+.incident-meta strong {
+  color: #506771;
+}
+
+
+/* =========================================================
+   DATA STREAMS
+========================================================= */
+
+.data-streams {
+  width: 100%;
+}
+
+.data-stream {
+  width: 100%;
+  height: 36px;
+
+  padding: 0 14px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  border-bottom: 1px solid #c1ccd1;
+
+  color: #6f8088;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f1f5f6,
+      #dce5e8
+    );
+
+  font-family: var(--os-mono);
+
+  font-size: 7px;
+
+  letter-spacing: 0.5px;
+}
+
+.data-stream svg {
+  color: #7195a3;
+}
+
+.data-stream strong {
+  margin-left: auto;
+
+  color: var(--os-green);
+
+  font-size: 7px;
+}
+
+
+/* =========================================================
+   MAP
+========================================================= */
+
+.map-area {
+  grid-column: 2;
+  grid-row: 1;
+
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+
+  background: #a9c9d2;
+}
+
+.map-area .leaflet-container {
+  position: absolute !important;
+
+  inset: 0;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  background: #b8d0d6;
+
+  font-family: var(--os-ui);
+}
+
+
+/* =========================================================
+   MAP TILE
+========================================================= */
+
+.map-area .leaflet-tile {
+  filter:
+    brightness(1.04)
+    saturate(0.74)
+    contrast(0.94);
+}
+
+
+/* =========================================================
+   MAP ZOOM CONTROL
+========================================================= */
+
+.leaflet-control-zoom {
+  margin-top: 15px !important;
+  margin-left: 15px !important;
+
+  border: 1px solid #9cabb2 !important;
+
+  border-radius: 4px !important;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 2px 7px rgba(35,55,65,0.20) !important;
+}
+
+.leaflet-control-zoom a {
+  width: 30px !important;
+  height: 30px !important;
+
+  line-height: 30px !important;
+
+  color: #526873 !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fafcfd,
+      #d7e1e5
+    ) !important;
+
+  border-bottom: 1px solid #adbcc3 !important;
+}
+
+.leaflet-control-zoom a:hover {
+  color: #276b89 !important;
+
+  background: #ffffff !important;
+}
+
+
+/* =========================================================
+   MAP MODE SWITCH
+========================================================= */
+
+.map-controls {
+  position: absolute;
+
+  top: 15px;
+  right: 15px;
+
+  z-index: 500;
+}
+
+.map-switch {
+  display: flex;
+
+  overflow: hidden;
+
+  border: 1px solid #9aabb3;
+
+  border-radius: 5px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fafcfd,
+      #d6e0e4
+    );
+
+  box-shadow:
+    0 2px 7px rgba(35,55,65,0.20),
+    inset 0 1px 0 #ffffff;
+}
+
+.map-switch button {
+  height: 34px;
+
+  padding: 0 14px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  border: 0;
+  border-right: 1px solid #b2c0c6;
+
+  color: #657780;
+
+  background: transparent;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.map-switch button:last-child {
+  border-right: 0;
+}
+
+.map-switch button:hover {
+  background: rgba(255,255,255,0.7);
+}
+
+.map-switch button.active {
+  color: #246786;
+
+  background:
+    linear-gradient(
+      180deg,
+      #e7f4f8,
+      #c4e0ea
+    );
+
+  box-shadow:
+    inset 0 -2px 0 #3184a7,
+    inset 0 1px 0 #ffffff;
+}
+
+
+/* =========================================================
+   MAP INCIDENT CARD
+========================================================= */
+
+.map-incident-label {
+  position: absolute;
+
+  top: 15px;
+  left: 60px;
+
+  z-index: 500;
+
+  width: 175px;
+
+  padding: 11px 13px;
+
+  border: 1px solid #9baeb6;
+
+  border-radius: 5px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(249,251,252,0.96),
+      rgba(220,230,234,0.96)
+    );
+
+  box-shadow:
+    0 3px 10px rgba(35,55,65,0.20),
+    inset 0 1px 0 #ffffff;
+}
+
+.label-kicker {
+  color: #71828a;
+
+  font-family: var(--os-mono);
+
+  font-size: 7px;
+
+  letter-spacing: 1.2px;
+}
+
+.label-id {
+  margin-top: 6px;
+
+  color: #314852;
+
+  font-family: var(--os-mono);
+
+  font-size: 15px;
+  font-weight: 600;
+
+  letter-spacing: 1px;
+}
+
+.label-coords {
+  margin-top: 5px;
+
+  color: #bb780c;
+
+  font-family: var(--os-mono);
+
+  font-size: 7px;
+}
+
+
+/* =========================================================
+   WIND
+========================================================= */
+
+.wind-indicator {
+  position: absolute;
+
+  top: 58px;
+  right: 15px;
+
+  z-index: 500;
+
+  height: 34px;
+
+  padding: 0 11px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  border: 1px solid #9caeb5;
+  border-radius: 4px;
+
+  color: #4f8192;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(249,251,252,0.96),
+      rgba(219,228,232,0.96)
+    );
+
+  box-shadow:
+    0 2px 6px rgba(35,55,65,0.17),
+    inset 0 1px 0 #ffffff;
+
+  font-family: var(--os-mono);
+  font-size: 8px;
+}
+
+.wind-indicator strong {
+  color: #687b84;
+}
+
+
+/* =========================================================
+   MAP LEGEND
+========================================================= */
+
+.map-legend {
+  position: absolute;
+
+  left: 15px;
+  bottom: 15px;
+
+  z-index: 500;
+
+  padding: 9px 12px;
+
+  border: 1px solid #9cabb2;
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(249,251,252,0.95),
+      rgba(218,228,232,0.95)
+    );
+
+  box-shadow:
+    0 2px 7px rgba(35,55,65,0.17),
+    inset 0 1px 0 #ffffff;
+}
+
+.legend-line {
+  height: 17px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  color: #667981;
+
+  font-size: 8px;
+}
+
+
+/* =========================================================
+   INTELLIGENCE PANEL
+========================================================= */
+
+.intel-panel {
+  flex: 0 0 292px;
+
+  height: 292px;
+  min-height: 292px;
+
+  width: 100%;
+
+  position: relative;
+
+  z-index: 700;
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      #edf2f4,
+      #d2dde1
+    );
+
+  border-top: 1px solid #9eafb7;
+
+  box-shadow:
+    0 -2px 8px rgba(40,60,70,0.16);
+}
+
+
+/* =========================================================
+   LEAFLET ATTRIBUTION
+========================================================= */
+
+.leaflet-control-attribution {
+  padding: 2px 5px !important;
+
+  color: #71828a !important;
+
+  background:
+    rgba(240,245,247,0.88) !important;
+
+  border:
+    1px solid rgba(155,171,179,0.55);
+
+  font-size: 7px !important;
+}
+
+.leaflet-control-attribution a {
+  color: #527d90 !important;
+}
+
+
+/* =========================================================
+   SCROLLBARS
+========================================================= */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color:
+    #a6b6bd
+    #dce5e8;
+}
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+::-webkit-scrollbar-track {
+  background: #dce5e8;
+}
+
+::-webkit-scrollbar-thumb {
+  background:
+    linear-gradient(
+      90deg,
+      #b9c6cb,
+      #98aab2
+    );
+
+  border: 2px solid #dce5e8;
+
+  border-radius: 5px;
+}
