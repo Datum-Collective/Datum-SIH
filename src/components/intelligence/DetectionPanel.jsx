@@ -22,11 +22,8 @@ export function MatchBars({ incident }) {
 
   return (
     <div className="match-bars">
-
       {values.map(([label, value]) => (
-
         <div className="match-row" key={label}>
-
           <span>{label}</span>
 
           <div className="match-track">
@@ -39,11 +36,8 @@ export function MatchBars({ incident }) {
           </div>
 
           <strong>{value}%</strong>
-
         </div>
-
       ))}
-
     </div>
   );
 }
@@ -61,7 +55,7 @@ export function EvidenceButton({ onClick }) {
   );
 }
 
-export default function DetectionPanel({ incident, onEvidence }) {
+export default function DetectionPanel({ incident }) {
   return (
     <div className="detection-layout">
 
@@ -99,6 +93,7 @@ export default function DetectionPanel({ incident, onEvidence }) {
 
           <div>
             <strong>{incident.vessel}</strong>
+
             <small>
               MMSI {incident.mmsi} · {incident.vesselType}
             </small>
@@ -107,15 +102,6 @@ export default function DetectionPanel({ incident, onEvidence }) {
         </div>
 
       </div>
-
-      <div className="attribution-box">
-        <span>ATTRIBUTION</span>
-        <strong>{incident.attribution}%</strong>
-      </div>
-
-      <MatchBars incident={incident} />
-
-      <EvidenceButton onClick={onEvidence} />
 
     </div>
   );

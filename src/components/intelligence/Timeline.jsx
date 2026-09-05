@@ -1,5 +1,4 @@
-import { Activity, ArrowLeft, ArrowRight } from "lucide-react";
-
+import { Activity, ArrowLeft } from "lucide-react";
 export default function Timeline({
   incident,
   timelineStep,
@@ -81,14 +80,6 @@ export default function Timeline({
 
       </div>
 
-      <button
-        className="impact-assessment-button"
-        onClick={onImpact}
-      >
-        <Activity size={15} />
-        IMPACT ASSESSMENT
-        <ArrowRight size={15} />
-      </button>
 
     </div>
   );

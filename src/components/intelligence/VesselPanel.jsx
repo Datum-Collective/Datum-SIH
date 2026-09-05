@@ -1,5 +1,5 @@
 import { Ship } from "lucide-react";
-import { EvidenceButton, MatchBars } from "./DetectionPanel";
+import { EvidenceButton } from "./DetectionPanel";
 
 export default function VesselPanel({ incident, onEvidence }) {
   return (
@@ -27,8 +27,6 @@ export default function VesselPanel({ incident, onEvidence }) {
         </div>
 
       </div>
-
-      <MatchBars incident={incident} />
 
       <EvidenceButton onClick={onEvidence} />
 

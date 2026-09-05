@@ -413,9 +413,11 @@
 .intel-content {
   min-height: 0;
 
-  overflow: auto;
+  overflow: hidden;
 
   padding: 10px 14px;
+
+  box-sizing: border-box;
 
   background:
     linear-gradient(
@@ -430,58 +432,42 @@
   height: 100%;
   min-height: 0;
 
+  box-sizing: border-box;
+
   display: grid;
 
   grid-template-columns:
-    repeat(4, minmax(110px, 1fr))
-    minmax(240px, 2fr)
-    95px;
+    repeat(4, minmax(0, 1fr))
+    minmax(220px, 1.6fr);
 
-  grid-template-rows: 100%;
+  grid-template-rows: minmax(0, 1fr);
 
   gap: 8px;
+
+  overflow: hidden;
 }
 
-.match-vessel {
-  min-width: 0;
+/* ============================================================
+   DETECTION SURFACE
+   ============================================================ */
 
-  padding: 7px 10px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  border: 1px solid var(--os-border);
-  border-radius: 4px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #eef0ef 100%
-    );
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.95),
-    0 1px 2px rgba(32,40,44,.07);
-}
-
-.match-bars {
-  display: none;
-}
-
+.metric,
+.match-vessel,
+.attribution-box,
 .evidence-button {
-  width: 100%;
-  height: 100%;
+  min-width: 0;
   min-height: 0;
+  box-sizing: border-box;
 }
+
 
 /* ============================================================
    GENERIC METRIC SURFACE
    ============================================================ */
 
 .metric {
-  min-height: 47px;
+  width: 100%;
+  height: 100%;
 
   padding: 7px 10px;
 
@@ -531,84 +517,18 @@
 
 
 /* ============================================================
-   SHARED BUTTONS
+   VESSEL MATCH
    ============================================================ */
 
-.evidence-button {
-  min-height: 32px;
+.match-vessel {
+  width: 100%;
+  height: 100%;
 
-  padding: 0 10px;
+  padding: 6px 10px;
 
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  gap: 7px;
-
-  border: 1px solid #aab5b7;
-  border-radius: 4px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #e2e6e5 100%
-    );
-
-  color: #536166;
-
-  font-family: var(--font-system);
-  font-size: 8px;
-  font-weight: 600;
-  letter-spacing: 0.055em;
-
-  box-shadow: var(--shadow-button);
-
-  transition:
-    border-color 90ms ease,
-    background 90ms ease,
-    color 90ms ease,
-    transform 60ms ease,
-    box-shadow 60ms ease;
-}
-
-.evidence-button svg:first-child {
-  color: var(--os-blue);
-}
-
-.evidence-button svg:last-child {
-  color: #8a969a;
-}
-
-.evidence-button:hover {
-  border-color: #83afb5;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #e8f0ef 100%
-    );
-
-  color: var(--os-graphite);
-}
-
-.evidence-button:hover svg:last-child {
-  color: var(--os-aqua);
-}
-
-.evidence-button:active {
-  transform: translateY(1px);
-
-  box-shadow: var(--shadow-pressed);
-}
-
-
-/* ============================================================
-   MATCH BARS
-   ============================================================ */
-
-.match-bars {
-  padding: 9px 10px;
 
   border: 1px solid var(--os-border);
   border-radius: 4px;
@@ -616,107 +536,19 @@
   background:
     linear-gradient(
       180deg,
-      #f9faf9,
-      #e8ebea
+      #ffffff 0%,
+      #eef0ef 100%
     );
 
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 1px 2px rgba(32, 40, 44, 0.06);
-}
-
-.match-row {
-  min-height: 20px;
-
-  display: grid;
-  grid-template-columns: 100px minmax(50px, 1fr) 37px;
-  align-items: center;
-  gap: 8px;
-}
-
-.match-row > span {
-  font-family: var(--font-system);
-  font-size: 8px;
-
-  color: #69767b;
-}
-
-.match-row > strong {
-  text-align: right;
-
-  font-family: var(--font-mono);
-  font-size: 8px;
-  font-weight: 500;
-
-  color: var(--os-graphite);
-
-  font-variant-numeric: tabular-nums;
-}
-
-.match-track {
-  height: 6px;
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 1px 2px rgba(32,40,44,.07);
 
   overflow: hidden;
-
-  border: 1px solid #c0c8c9;
-  border-radius: 2px;
-
-  background: #d7dcdb;
-
-  box-shadow:
-    inset 0 1px 2px rgba(32, 40, 44, 0.10);
-}
-
-.match-fill {
-  height: 100%;
-
-  background:
-    linear-gradient(
-      90deg,
-      #397cb5 0%,
-      #4aa8b5 100%
-    );
-
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.25);
-}
-
-
-/* ============================================================
-   VESSEL
-   ============================================================ */
-
-.ship-icon {
-  width: 34px;
-  height: 34px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border: 1px solid #aeb9bb;
-  border-radius: 4px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff,
-      #dfe5e4
-    );
-
-  color: var(--os-blue);
-
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    0 1px 2px rgba(32, 40, 44, 0.08);
-}
-
-.ship-icon.large {
-  width: 38px;
-  height: 38px;
 }
 
 .vessel-inline {
+  min-width: 0;
   margin-top: 5px;
 
   display: flex;
@@ -724,9 +556,56 @@
   gap: 8px;
 }
 
-.vessel-inline strong {
+.ship-icon {
+  width: 25px;
+  height: 25px;
+
+  flex: 0 0 25px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  border: 1px solid #b5c0c2;
+  border-radius: 3px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #e3e8e7
+    );
+
+  color: var(--os-blue);
+}
+
+.ship-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.ship-icon.large {
+  width: 38px;
+  height: 38px;
+}
+
+.vessel-inline > div:last-child {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.vessel-inline strong,
+.vessel-inline small {
   display: block;
 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.vessel-inline strong {
   font-family: var(--font-ui);
   font-size: 10px;
   line-height: 1;
@@ -737,8 +616,6 @@
 }
 
 .vessel-inline small {
-  display: block;
-
   margin-top: 4px;
 
   font-family: var(--font-mono);
@@ -754,7 +631,8 @@
    ============================================================ */
 
 .attribution-box {
-  min-width: 73px;
+  width: 100%;
+  height: 100%;
 
   padding: 7px 9px;
 
@@ -803,6 +681,174 @@
 }
 
 
+/* ============================================================
+   EVIDENCE BUTTON
+   ============================================================ */
+
+.evidence-button {
+  grid-column: 7;
+  grid-row: 1;
+
+  width: 100%;
+  height: 100%;
+
+  align-self: stretch;
+
+  padding: 0 10px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  border: 1px solid #aab5b7;
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #e2e6e5 100%
+    );
+
+  color: #536166;
+
+  font-family: var(--font-system);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.055em;
+
+  white-space: nowrap;
+
+  box-shadow: var(--shadow-button);
+
+  transition:
+    border-color 90ms ease,
+    background 90ms ease,
+    color 90ms ease,
+    transform 60ms ease,
+    box-shadow 60ms ease;
+}
+
+.evidence-button svg:first-child {
+  color: var(--os-blue);
+}
+
+.evidence-button svg:last-child {
+  color: #8a969a;
+}
+
+.evidence-button:hover {
+  border-color: #83afb5;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #e8f0ef 100%
+    );
+
+  color: var(--os-graphite);
+}
+
+.evidence-button:hover svg:last-child {
+  color: var(--os-aqua);
+}
+
+.evidence-button:active {
+  transform: translateY(1px);
+
+  box-shadow: var(--shadow-pressed);
+}
+
+
+/* ============================================================
+   MATCH BARS
+   ============================================================ */
+
+.match-bars {
+  display: none;
+}
+
+.vessel-panel .match-bars {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  box-sizing: border-box;
+
+  padding: 8px 11px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border: 1px solid var(--os-border);
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f9faf9 0%,
+      #e8ebea 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 1px 2px rgba(32,40,44,.06);
+}
+
+.vessel-panel .match-row {
+  min-height: 20px;
+
+  display: grid;
+
+  grid-template-columns:
+    100px
+    minmax(50px, 1fr)
+    37px;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.vessel-panel .match-row > span {
+  font-family: var(--font-system);
+  font-size: 7px;
+
+  color: #69767b;
+}
+
+.vessel-panel .match-track {
+  height: 4px;
+
+  overflow: hidden;
+
+  border-radius: 2px;
+
+  background: #d1d8d7;
+}
+
+.vessel-panel .match-fill {
+  height: 100%;
+
+  border-radius: 2px;
+
+  background: var(--os-aqua);
+}
+
+.vessel-panel .match-row > strong {
+  text-align: right;
+
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 500;
+
+  color: var(--os-graphite);
+
+  font-variant-numeric: tabular-nums;
+}
 /* ============================================================
    INTELLIGENCE PANEL SCROLLBARS
    ============================================================ */
@@ -1211,4 +1257,1224 @@
 
 .impact-assessment-button svg:last-child {
   color: #899598;
+}
+/* ============================================================
+   VESSELS / FORECAST / IMPACT TAB CONTENT
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   VESSELS
+   ------------------------------------------------------------ */
+
+.vessel-panel {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  box-sizing: border-box;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(260px, 1.1fr)
+    minmax(320px, 2fr)
+    130px;
+
+  grid-template-rows: minmax(0, 1fr);
+
+  gap: 8px;
+
+  overflow: hidden;
+}
+.vessel-main {
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+
+  padding: 9px 12px;
+
+  border: 1px solid var(--os-border);
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #eef0ef 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 1px 2px rgba(32,40,44,.07);
+
+  overflow: hidden;
+}
+
+.vessel-main .ship-icon.large {
+  width: 38px;
+  height: 38px;
+
+  flex: 0 0 38px;
+
+  margin-right: 10px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #b5c0c2;
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #e3e8e7
+    );
+
+  color: var(--os-blue);
+}
+
+.vessel-main .ship-icon.large svg {
+  width: 20px;
+  height: 20px;
+}
+
+.vessel-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+
+  font-weight: 600;
+
+  color: var(--os-graphite);
+}
+
+.vessel-sub {
+  margin-top: 5px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-family: var(--font-mono);
+  font-size: 7px;
+  line-height: 1;
+
+  color: #818d91;
+}
+
+.vessel-main .attribution-box {
+  margin-left: auto;
+
+  width: 78px;
+  min-width: 78px;
+
+  height: 48px;
+
+  flex: 0 0 78px;
+}
+
+/* ------------------------------------------------------------
+   FORECAST
+   ------------------------------------------------------------ */
+
+.forecast-panel {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  grid-template-rows: 1fr 28px;
+
+  gap: 8px;
+
+  box-sizing: border-box;
+}
+
+.forecast-summary {
+  min-width: 0;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 8px;
+}
+
+.forecast-summary > div {
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 8px 11px;
+
+  border: 1px solid var(--os-border);
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #eef0ef 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 1px 2px rgba(32,40,44,.07);
+}
+
+.forecast-summary .metric-label {
+  margin-bottom: 5px;
+}
+
+.forecast-summary strong {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+
+  font-weight: 600;
+
+  color: var(--os-graphite);
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.forecast-timeline {
+  min-width: 0;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+
+  border: 1px solid var(--os-border);
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f4f6f5 0%,
+      #e3e8e7 100%
+    );
+
+  overflow: hidden;
+}
+
+.forecast-timeline button {
+  position: relative;
+
+  min-width: 0;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  padding: 0 5px;
+
+  border: 0;
+  border-right: 1px solid #c8d0d0;
+
+  background: transparent;
+
+  color: #748186;
+
+  font-family: var(--font-mono);
+
+  cursor: pointer;
+}
+
+.forecast-timeline button:last-child {
+  border-right: 0;
+}
+
+.forecast-timeline button:hover {
+  background: rgba(255,255,255,.45);
+}
+
+.forecast-timeline button.selected {
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #e8eceb 100%
+    );
+
+  color: var(--os-graphite);
+
+  box-shadow:
+    inset 0 2px 0 var(--os-aqua);
+}
+
+.forecast-timeline button span {
+  font-size: 8px;
+  line-height: 1;
+
+  font-weight: 600;
+}
+
+.forecast-timeline button small {
+  font-size: 6px;
+  line-height: 1;
+
+  color: #899598;
+}
+
+.forecast-timeline button.selected small {
+  color: #657277;
+}
+
+.forecast-status {
+  grid-column: 1 / -1;
+
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 0 11px;
+
+  border-top: 1px solid #aeb8ba;
+
+  font-family: var(--font-mono);
+  font-size: 7px;
+}
+
+.forecast-status span {
+  color: #7c888c;
+
+  font-family: var(--font-system);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: .07em;
+}
+
+.forecast-status strong {
+  color: var(--os-graphite);
+
+  font-size: 8px;
+  font-weight: 600;
+}
+
+
+/* ------------------------------------------------------------
+   IMPACT
+   ------------------------------------------------------------ */
+
+.impact-panel {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  display: grid;
+  grid-template-columns:
+    minmax(180px, 1fr)
+    minmax(180px, 1fr)
+    minmax(180px, 1fr)
+    140px;
+
+  grid-template-rows: 1fr;
+
+  gap: 8px;
+
+  box-sizing: border-box;
+}
+
+.impact-card {
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+
+  padding: 10px 12px;
+
+  border: 1px solid var(--os-border);
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #eef0ef 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 1px 2px rgba(32,40,44,.07);
+}
+
+.impact-icon {
+  width: 32px;
+  height: 32px;
+
+  flex: 0 0 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 10px;
+
+  border: 1px solid #c3cbcc;
+  border-radius: 4px;
+
+  background: #e9eeed;
+
+  color: var(--os-amber);
+}
+
+.impact-card > div:nth-child(2) {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.impact-card span {
+  font-family: var(--font-system);
+  font-size: 7px;
+  line-height: 1;
+
+  font-weight: 700;
+  letter-spacing: .07em;
+
+  color: #7d898d;
+}
+
+.impact-card strong {
+  margin-top: 6px;
+
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1;
+
+  font-weight: 600;
+
+  color: var(--os-amber);
+
+  white-space: nowrap;
+}
+
+.impact-card small {
+  margin-left: auto;
+
+  align-self: center;
+
+  font-family: var(--font-mono);
+  font-size: 8px;
+  line-height: 1;
+
+  color: #707d81;
+
+  white-space: nowrap;
+}
+
+.impact-open {
+  width: 100%;
+  height: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 0 9px;
+
+  border: 1px solid #aab5b7;
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #e2e6e5 100%
+    );
+
+  color: #536166;
+
+  font-family: var(--font-system);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: .055em;
+
+  white-space: nowrap;
+
+  box-shadow: var(--shadow-button);
+
+  cursor: pointer;
+}
+
+.impact-open svg:first-child {
+  color: var(--os-blue);
+}
+
+.impact-open svg:last-child {
+  color: #899598;
+}
+
+.impact-open:hover {
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #e8f0ef 100%
+    );
+
+  color: var(--os-graphite);
+}
+
+.impact-open:hover svg:last-child {
+  color: var(--os-aqua);
+}
+
+/* ============================================================
+   VESSEL INVESTIGATION TAB
+   ============================================================ */
+
+.vessel-panel {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns:
+    minmax(240px, 1.15fr)
+    minmax(300px, 2fr)
+    125px;
+
+  grid-template-rows: minmax(0, 1fr);
+
+  gap: 8px;
+
+  overflow: hidden;
+}
+
+.vessel-panel .vessel-main {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  padding: 7px 10px;
+
+  border: 1px solid var(--os-border);
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #eef0ef 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 1px 2px rgba(32,40,44,.07);
+
+  overflow: hidden;
+}
+
+.vessel-panel .ship-icon.large {
+  width: 34px;
+  height: 34px;
+
+  flex: 0 0 34px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-right: 9px;
+
+  border: 1px solid #b5c0c2;
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #e3e8e7
+    );
+
+  color: var(--os-blue);
+}
+
+.vessel-panel .ship-icon.large svg {
+  width: 19px;
+  height: 19px;
+}
+
+.vessel-panel .vessel-name {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+
+  font-weight: 600;
+
+  color: var(--os-graphite);
+}
+
+.vessel-panel .vessel-sub {
+  margin-top: 4px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-family: var(--font-mono);
+  font-size: 6px;
+  line-height: 1;
+
+  color: #818d91;
+}
+
+
+/* ------------------------------------------------------------
+   ATTRIBUTION
+   ------------------------------------------------------------ */
+
+.vessel-panel .attribution-box {
+  width: 70px;
+  min-width: 70px;
+  height: 100%;
+
+  flex: 0 0 70px;
+
+  margin-left: auto;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  border-left: 1px solid #d4bd88;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffdf8,
+      #eee8da
+    );
+}
+
+.vessel-panel .attribution-box span {
+  font-family: var(--font-system);
+  font-size: 6px;
+  line-height: 1;
+
+  font-weight: 700;
+  letter-spacing: .07em;
+
+  color: #8a7c60;
+}
+
+.vessel-panel .attribution-box strong {
+  margin-top: 4px;
+
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1;
+
+  font-weight: 500;
+
+  color: #9c6b16;
+}
+
+
+/* ------------------------------------------------------------
+   MATCH BREAKDOWN
+   ------------------------------------------------------------ */
+
+.vessel-panel .match-bars {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 4px 9px;
+
+  border: 1px solid var(--os-border);
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f9faf9,
+      #e8ebea
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 1px 2px rgba(32,40,44,.06);
+
+  overflow: hidden;
+}
+
+.vessel-panel .match-row {
+  min-height: 10px;
+  height: 10px;
+
+  display: grid;
+
+  grid-template-columns:
+    92px
+    minmax(40px, 1fr)
+    30px;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+.vessel-panel .match-row > span {
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-family: var(--font-system);
+  font-size: 6px;
+  line-height: 1;
+
+  color: #69767b;
+}
+
+.vessel-panel .match-track {
+  width: 100%;
+  height: 4px;
+
+  overflow: hidden;
+
+  border: 1px solid #c0c8c9;
+  border-radius: 2px;
+
+  box-sizing: border-box;
+
+  background: #d7dcdb;
+}
+
+.vessel-panel .match-fill {
+  height: 100%;
+
+  border-radius: 1px;
+
+  background: var(--os-aqua);
+}
+
+.vessel-panel .match-row > strong {
+  text-align: right;
+
+  font-family: var(--font-mono);
+  font-size: 6px;
+  line-height: 1;
+
+  font-weight: 600;
+
+  color: var(--os-graphite);
+
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ------------------------------------------------------------
+   VIEW EVIDENCE
+   ------------------------------------------------------------ */
+
+.vessel-panel .evidence-button {
+  width: 100%;
+  height: 100%;
+
+  min-width: 0;
+  min-height: 0;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 8px;
+}
+
+
+/* ============================================================
+   EVIDENCE MODAL
+   ============================================================ */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  box-sizing: border-box;
+
+  background: rgba(30, 39, 43, .32);
+
+  backdrop-filter: blur(2px);
+}
+
+.evidence-modal {
+  width: min(720px, 100%);
+  max-height: min(620px, 90vh);
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  border: 1px solid #9da9ac;
+  border-radius: 5px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f7f9f8 0%,
+      #e3e8e7 100%
+    );
+
+  color: var(--os-graphite);
+
+  box-shadow:
+    0 16px 45px rgba(22,31,35,.25),
+    inset 0 1px 0 rgba(255,255,255,.95);
+}
+
+
+/* ------------------------------------------------------------
+   MODAL HEADER
+   ------------------------------------------------------------ */
+
+.evidence-modal .modal-header {
+  min-height: 66px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 18px;
+
+  box-sizing: border-box;
+
+  border-bottom: 1px solid var(--os-border);
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #e9edec 100%
+    );
+}
+
+.evidence-modal .modal-header span {
+  display: block;
+
+  font-family: var(--font-system);
+  font-size: 7px;
+  line-height: 1;
+
+  font-weight: 700;
+  letter-spacing: .11em;
+
+  color: #7b878b;
+}
+
+.evidence-modal .modal-header h2 {
+  margin: 6px 0 0;
+
+  font-family: var(--font-mono);
+  font-size: 17px;
+  line-height: 1;
+
+  font-weight: 600;
+  letter-spacing: .035em;
+
+  color: var(--os-graphite);
+}
+
+.evidence-modal .modal-header > button {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #b5bfc1;
+  border-radius: 3px;
+
+  background: #edf0ef;
+
+  color: #657277;
+
+  font-family: var(--font-system);
+  font-size: 16px;
+
+  cursor: pointer;
+}
+
+.evidence-modal .modal-header > button:hover {
+  background: #e2e7e6;
+  color: var(--os-graphite);
+}
+
+
+/* ------------------------------------------------------------
+   EVIDENCE GRID
+   ------------------------------------------------------------ */
+
+.evidence-modal .evidence-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+
+  padding: 14px 18px 8px;
+}
+
+.evidence-modal .evidence-item {
+  min-width: 0;
+
+  min-height: 64px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  padding: 9px 11px;
+
+  border: 1px solid var(--os-border);
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #edf0ef
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9);
+}
+
+.evidence-modal .evidence-item > span {
+  font-family: var(--font-system);
+  font-size: 6px;
+  line-height: 1;
+
+  font-weight: 700;
+  letter-spacing: .09em;
+
+  color: #7b878b;
+}
+
+.evidence-modal .evidence-item > strong {
+  margin-top: 7px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1;
+
+  font-weight: 600;
+
+  color: var(--os-graphite);
+}
+
+.evidence-modal .evidence-item > small {
+  margin-top: 5px;
+
+  font-family: var(--font-mono);
+  font-size: 6px;
+  line-height: 1;
+
+  color: var(--os-aqua);
+
+  font-weight: 600;
+}
+
+
+/* ------------------------------------------------------------
+   EVIDENCE WARNING
+   ------------------------------------------------------------ */
+
+.evidence-modal .evidence-note {
+  margin: 8px 18px 14px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  padding: 11px 12px;
+
+  border: 1px solid #d0b879;
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffdf7,
+      #eee8da
+    );
+
+  color: #6f6250;
+}
+
+.evidence-modal .evidence-note > svg {
+  flex: 0 0 16px;
+
+  margin-top: 1px;
+
+  color: var(--os-amber);
+}
+
+.evidence-modal .evidence-note strong {
+  display: block;
+
+  font-family: var(--font-system);
+  font-size: 8px;
+  line-height: 1;
+
+  font-weight: 700;
+
+  color: #806522;
+}
+
+.evidence-modal .evidence-note p {
+  margin: 6px 0 0;
+
+  font-family: var(--font-mono);
+  font-size: 7px;
+  line-height: 1.6;
+
+  color: #746d61;
+}
+
+
+/* ------------------------------------------------------------
+   MODAL CLOSE
+   ------------------------------------------------------------ */
+
+.evidence-modal .modal-close {
+  align-self: flex-end;
+
+  margin: 0 18px 16px;
+
+  min-height: 32px;
+
+  padding: 0 13px;
+
+  box-sizing: border-box;
+
+  border: 1px solid #aab5b7;
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #e2e6e5
+    );
+
+  color: #536166;
+
+  font-family: var(--font-system);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: .07em;
+
+  cursor: pointer;
+}
+
+.evidence-modal .modal-close:hover {
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #e8f0ef
+    );
+
+  color: var(--os-graphite);
+}
+
+/* ============================================================
+   EVIDENCE — VESSEL MATCH ANALYSIS
+   ============================================================ */
+
+.evidence-match-section {
+  padding: 4px 18px 10px;
+}
+
+.evidence-section-label {
+  margin-bottom: 6px;
+
+  font-family: var(--font-system);
+  font-size: 6px;
+  line-height: 1;
+
+  font-weight: 700;
+  letter-spacing: .10em;
+
+  color: #7b878b;
+}
+
+.evidence-modal .match-bars {
+  width: 100%;
+  box-sizing: border-box;
+
+  padding: 8px 10px;
+
+  border: 1px solid var(--os-border);
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f9faf9 0%,
+      #e8ebea 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 1px 2px rgba(32,40,44,.05);
+}
+
+.evidence-modal .match-row {
+  min-height: 17px;
+
+  display: grid;
+
+  grid-template-columns:
+    105px
+    minmax(60px, 1fr)
+    34px;
+
+  align-items: center;
+
+  gap: 8px;
+}
+
+.evidence-modal .match-row > span {
+  font-family: var(--font-system);
+  font-size: 7px;
+  line-height: 1;
+
+  color: #69767b;
+}
+
+.evidence-modal .match-track {
+  width: 100%;
+  height: 5px;
+
+  overflow: hidden;
+
+  border: 1px solid #c0c8c9;
+  border-radius: 2px;
+
+  box-sizing: border-box;
+
+  background: #d7dcdb;
+}
+
+.evidence-modal .match-fill {
+  height: 100%;
+
+  border-radius: 1px;
+
+  background: var(--os-aqua);
+}
+
+.evidence-modal .match-row > strong {
+  text-align: right;
+
+  font-family: var(--font-mono);
+  font-size: 7px;
+  line-height: 1;
+
+  font-weight: 600;
+
+  color: var(--os-graphite);
+
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ============================================================
+   VESSEL TAB — ONLY VESSEL + ATTRIBUTION + EVIDENCE
+   ============================================================ */
+
+.vessel-panel {
+  grid-template-columns:
+    minmax(0, 1fr)
+    125px;
+}
+
+.vessel-panel .vessel-main {
+  min-width: 0;
 }
