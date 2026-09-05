@@ -1,342 +1,1299 @@
-/* =====================================================
-   MAP
-===================================================== */
+/* ============================================================
+   OSIRIS
+   MAP / GEOSPATIAL WORKSTATION
+   ============================================================ */
 
 .map-area {
   position: relative;
+
   min-width: 0;
+  min-height: 0;
+
   overflow: hidden;
-  background: #0b1114;
+
+  background: #afc7cb;
+
+  border: 0;
 }
 
-.leaflet-container {
+
+/* ============================================================
+   LEAFLET
+   ============================================================ */
+
+.map-area .leaflet-container {
   width: 100%;
   height: 100%;
-  background: #0b1114;
-  font-family: "Inter", sans-serif;
+
+  background: #afc7cb;
+
+  font-family: var(--font-system);
+
+  cursor: default;
 }
 
-/* Darken chart map while preserving readable labels. */
+.map-area .leaflet-control-attribution {
+  padding: 2px 5px;
+
+  border-top: 1px solid rgba(120, 132, 135, 0.55);
+  border-left: 1px solid rgba(120, 132, 135, 0.40);
+
+  border-radius: 3px 0 0 0;
+
+  background: rgba(239, 241, 240, 0.88);
+
+  color: #697579;
+
+  font-family: var(--font-system);
+  font-size: 8px;
+
+  box-shadow: none;
+}
+
+.map-area .leaflet-control-attribution a {
+  color: #53686d;
+}
+
+
+/* ============================================================
+   MAP TILE TREATMENT
+   ============================================================ */
+
+/*
+   The underlying tiles are deliberately desaturated.
+
+   OSIRIS is an analytical workstation rather than a satellite
+   imagery showcase. Data overlays should carry the visual
+   hierarchy.
+*/
 
 .map-area .leaflet-tile {
-  filter: brightness(0.58) saturate(0.55) contrast(1.12);
+  filter:
+    saturate(0.48)
+    contrast(0.91)
+    brightness(1.08);
 }
 
-/* Satellite should stay photographic. */
-
-.map-area.satellite .leaflet-tile {
-  filter: brightness(0.72) saturate(0.85) contrast(1.08);
+.map-area .leaflet-layer {
+  opacity: 1;
 }
 
-.leaflet-control-attribution {
-  background: rgba(3, 8, 11, 0.65) !important;
-  color: #53636b !important;
-  font-size: 7px !important;
+
+/* Satellite mode remains photographic, but restrained. */
+
+.map-area:has(.leaflet-tile-pane img[src*="World_Imagery"])
+  .leaflet-tile {
+  filter:
+    saturate(0.56)
+    contrast(0.92)
+    brightness(1.02);
 }
 
-.leaflet-control-attribution a {
-  color: #66777f !important;
+
+/* ============================================================
+   MAP EDGE / ANALYTICAL OVERLAY
+   ============================================================ */
+
+.map-area::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  border: 1px solid rgba(91, 105, 109, 0.35);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
 }
 
-/* =====================================================
-   MAP CONTROLS
-===================================================== */
+
+/* ============================================================
+   SELECTED INCIDENT LABEL
+   ============================================================ */
+
+.map-incident-label {
+  position: absolute;
+
+  top: 14px;
+  left: 14px;
+
+  z-index: 500;
+
+  width: 205px;
+
+  padding: 10px 11px 9px;
+
+  border: 1px solid var(--os-border-dark);
+  border-radius: 5px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(250, 251, 250, 0.96),
+      rgba(231, 235, 234, 0.94)
+    );
+
+  box-shadow:
+    0 2px 7px rgba(32, 40, 44, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.90);
+
+  color: var(--os-text);
+}
+
+.label-kicker {
+  font-family: var(--font-system);
+  font-size: 7px;
+  line-height: 1;
+
+  font-weight: 700;
+  letter-spacing: 0.10em;
+
+  color: #778388;
+}
+
+.label-id {
+  margin-top: 5px;
+
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1;
+
+  font-weight: 600;
+  letter-spacing: 0.045em;
+
+  color: var(--os-graphite);
+}
+
+.label-location {
+  margin-top: 6px;
+
+  font-family: var(--font-ui);
+  font-size: 10px;
+  line-height: 1.2;
+
+  color: #5e6b70;
+}
+
+.label-coords {
+  margin-top: 5px;
+
+  padding-top: 5px;
+
+  border-top: 1px solid var(--os-border-light);
+
+  font-family: var(--font-mono);
+  font-size: 8px;
+  line-height: 1;
+
+  color: #78858a;
+
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ============================================================
+   MAP MODE SWITCH
+   ============================================================ */
 
 .map-controls {
   position: absolute;
-  top: 16px;
-  right: 16px;
+
+  right: 14px;
+  top: 14px;
+
   z-index: 500;
 }
 
 .map-switch {
   display: flex;
 
-  border: 1px solid #283840;
-  background: rgba(5, 13, 17, 0.94);
+  padding: 2px;
+
+  border: 1px solid var(--os-border-dark);
+  border-radius: 5px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(248, 249, 248, 0.97),
+      rgba(220, 225, 224, 0.97)
+    );
+
+  box-shadow:
+    0 2px 7px rgba(32, 40, 44, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 .map-switch button {
-  height: 34px;
+  height: 27px;
 
-  padding: 0 14px;
+  padding: 0 9px;
 
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 
-  border: 0;
-  border-right: 1px solid #26363d;
+  border: 1px solid transparent;
+  border-radius: 3px;
 
   background: transparent;
-  color: #718088;
 
-  font-family: "IBM Plex Mono", monospace;
+  color: #657278;
+
+  font-family: var(--font-system);
   font-size: 8px;
-  letter-spacing: 1px;
+  font-weight: 600;
+  letter-spacing: 0.055em;
 
-  cursor: pointer;
+  box-shadow: none;
+
+  transition:
+    background 90ms ease,
+    border-color 90ms ease,
+    color 90ms ease,
+    box-shadow 90ms ease;
 }
 
-.map-switch button:last-child {
-  border-right: 0;
+.map-switch button:hover {
+  color: var(--os-graphite);
+
+  background: rgba(255, 255, 255, 0.65);
 }
 
 .map-switch button.active {
-  background: #0c181d;
-  color: #d9e2e5;
+  border-color: #aeb9bb;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #e1e6e5 100%
+    );
+
+  color: var(--os-graphite);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 1px 1px rgba(32, 40, 44, 0.10);
 }
 
-.map-switch button.active:first-child {
-  box-shadow: inset 0 -2px 0 var(--cyan);
+.map-switch button.active svg {
+  color: var(--os-aqua);
 }
 
-.map-switch button.active:last-child {
-  box-shadow: inset 0 -2px 0 var(--amber);
+.map-switch button:active {
+  transform: translateY(1px);
+
+  box-shadow:
+    inset 0 1px 2px rgba(32, 40, 44, 0.16);
 }
+
+
+/* ============================================================
+   WIND INDICATOR
+   ============================================================ */
 
 .wind-indicator {
   position: absolute;
-  right: 16px;
-  top: 59px;
+
+  right: 14px;
+  bottom: 51px;
 
   z-index: 500;
 
-  height: 35px;
+  height: 30px;
 
-  padding: 0 12px;
+  padding: 0 9px;
+
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  border: 1px solid var(--os-border-dark);
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(249, 250, 249, 0.95),
+      rgba(224, 229, 228, 0.94)
+    );
+
+  box-shadow:
+    0 2px 6px rgba(32, 40, 44, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  color: #69767a;
+
+  font-family: var(--font-system);
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.wind-indicator svg {
+  color: var(--os-blue);
+}
+
+.wind-indicator strong {
+  color: var(--os-graphite);
+
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+
+/* ============================================================
+   MAP LEGEND
+   ============================================================ */
+
+.map-legend {
+  position: absolute;
+
+  left: 14px;
+  bottom: 14px;
+
+  z-index: 500;
+
+  min-width: 145px;
+
+  padding: 8px 10px;
+
+  border: 1px solid var(--os-border-dark);
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(249, 250, 249, 0.96),
+      rgba(225, 229, 228, 0.95)
+    );
+
+  box-shadow:
+    0 2px 7px rgba(32, 40, 44, 0.17),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.legend-line {
+  min-height: 19px;
 
   display: flex;
   align-items: center;
   gap: 8px;
 
-  border: 1px solid #25353c;
-  background: rgba(4, 11, 15, 0.94);
+  color: #657278;
 
-  color: var(--cyan);
-
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-system);
   font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.035em;
 }
 
-.wind-indicator strong {
-  color: #a9b6ba;
+.legend-symbol {
+  width: 18px;
+  height: 2px;
+
+  flex: 0 0 18px;
+
+  background: #879296;
 }
 
-.wind-indicator span:last-child {
-  color: #9ca9ae;
+.legend-symbol.oil {
+  height: 8px;
+
+  border: 1px dashed #b17d21;
+
+  background: rgba(215, 154, 45, 0.20);
 }
 
-/* =====================================================
-   MAP LABELS
-===================================================== */
+.legend-symbol.ais {
+  background: #397cb5;
 
-.map-incident-label {
-  position: absolute;
-  left: 17px;
-  top: 17px;
-
-  z-index: 500;
-
-  width: 160px;
-
-  padding: 13px 14px;
-
-  border: 1px solid #26373e;
-  background: rgba(3, 10, 14, 0.94);
+  background-image:
+    linear-gradient(
+      90deg,
+      #397cb5 0 55%,
+      transparent 55% 75%,
+      #397cb5 75%
+    );
 }
 
-.label-kicker {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 7px;
-  letter-spacing: 1.5px;
-  color: #63727a;
+.legend-symbol.forecast {
+  background-image:
+    linear-gradient(
+      90deg,
+      #d79a2d 0 50%,
+      transparent 50% 72%,
+      #d79a2d 72%
+    );
+
+  background-color: transparent;
 }
 
-.label-id {
-  margin-top: 9px;
+.legend-symbol.source {
+  width: 9px;
+  height: 9px;
 
-  font-family: "IBM Plex Mono", monospace;
+  margin-left: 4px;
+  margin-right: 5px;
+
+  border: 2px solid #4aa8b5;
+  border-radius: 50%;
+
+  background: #f5f6f4;
+}
+
+
+/* ============================================================
+   LEAFLET POPUP / MARKERS
+   ============================================================ */
+
+.map-area .leaflet-popup-content-wrapper,
+.map-area .leaflet-popup-tip {
+  border: 1px solid var(--os-border);
+
+  background: var(--os-raised);
+
+  box-shadow: var(--shadow-raised);
+}
+
+.map-area .leaflet-popup-content {
+  margin: 10px 12px;
+
+  color: var(--os-text);
+
+  font-family: var(--font-system);
+  font-size: 11px;
+}
+
+.map-area .leaflet-popup-close-button {
+  color: var(--os-secondary);
+}
+
+
+/* ============================================================
+   MAP ZOOM CONTROLS
+   ============================================================ */
+
+.map-area .leaflet-control-zoom {
+  margin: 14px 0 0 14px !important;
+
+  border: 1px solid var(--os-border-dark);
+  border-radius: 4px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 2px 6px rgba(32, 40, 44, 0.16);
+}
+
+.map-area .leaflet-control-zoom a {
+  width: 28px;
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-bottom: 1px solid var(--os-border);
+
+  background:
+    linear-gradient(
+      180deg,
+      #fafbfa,
+      #e1e5e4
+    );
+
+  color: #536166;
+
+  font-family: var(--font-system);
   font-size: 17px;
-  letter-spacing: 1.5px;
+  line-height: 27px;
 }
 
-.label-coords {
-  margin-top: 7px;
-
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 7px;
-  color: var(--amber);
+.map-area .leaflet-control-zoom a:last-child {
+  border-bottom: 0;
 }
 
-/* Actual geographic popup labels. */
+.map-area .leaflet-control-zoom a:hover {
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff,
+      #e9edec
+    );
+
+  color: var(--os-aqua);
+}
+
+.map-area .leaflet-control-zoom a:active {
+  background: #dce1e1;
+
+  box-shadow:
+    inset 0 1px 2px rgba(32, 40, 44, 0.15);
+}
+
+
+/* ============================================================
+   RESPONSIVE TIGHTENING
+   ============================================================ */
+
+@media (max-width: 1280px) {
+  .map-incident-label {
+    width: 185px;
+  }
+
+  .map-switch button {
+    padding: 0 7px;
+  }
+}
+
+/* ============================================================
+   OSIRIS MAP ANNOTATIONS
+   ============================================================ */
 
 .spill-label-icon,
 .source-label-icon {
   background: transparent !important;
   border: 0 !important;
+  overflow: visible !important;
+  pointer-events: none !important;
+
+  filter:
+    drop-shadow(0 4px 10px rgba(0, 0, 0, 0.45))
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.8));
 }
+
+
+/* ============================================================
+   OIL SLICK DETECTION
+   ============================================================ */
 
 .spill-label {
-  width: 150px;
-  min-height: 68px;
-
-  padding: 10px 12px;
-
-  border: 1px solid #bd7900;
-  background: rgba(4, 10, 13, 0.96);
-
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-
   position: relative;
+
+  width: 174px;
+  min-height: 82px;
+
+  padding: 11px 13px 10px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(8, 20, 26, 0.96),
+      rgba(4, 12, 16, 0.94)
+    );
+
+  border: 1px solid rgba(255, 102, 87, 0.78);
+  border-radius: 3px;
+
+  color: #dce4e8;
+
+  font-family: var(--os-ui);
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
-.spill-label::before {
+
+/* connector */
+
+.spill-label::after {
   content: "";
 
   position: absolute;
+
   left: 50%;
   bottom: -7px;
 
   width: 12px;
   height: 12px;
 
-  transform: translateX(-50%) rotate(45deg);
+  transform:
+    translateX(-50%)
+    rotate(45deg);
 
-  background: #040a0d;
-  border-right: 1px solid #bd7900;
-  border-bottom: 1px solid #bd7900;
+  background: #071116;
+
+  border-right:
+    1px solid rgba(255, 102, 87, 0.78);
+
+  border-bottom:
+    1px solid rgba(255, 102, 87, 0.78);
 }
+
+
+/* ============================================================
+   SPILL TEXT
+   ============================================================ */
 
 .spill-label-kicker {
   display: flex;
   align-items: center;
+
   gap: 6px;
 
-  font-family: "IBM Plex Mono", monospace;
+  margin-bottom: 7px;
+
+  color: #ff8a7d;
+
+  font-family: var(--os-mono);
+
   font-size: 7px;
-  letter-spacing: 1px;
-  color: var(--amber);
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+
+  text-transform: uppercase;
 }
 
 .spill-warning {
-  font-size: 12px;
+  color: #ff6657;
+
+  font-size: 11px;
+  line-height: 1;
 }
 
 .spill-label-area {
-  margin-top: 6px;
+  color: #eef3f5;
 
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 16px;
-  color: #e8edf0;
+  font-family: var(--os-mono);
+
+  font-size: 17px;
+  font-weight: 500;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.02em;
 }
 
 .spill-label-time {
-  margin-top: 4px;
+  margin-top: 8px;
 
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 6px;
-  color: #65747b;
+  color: #718089;
+
+  font-family: var(--os-mono);
+
+  font-size: 6.5px;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
 }
 
+
+/* ============================================================
+   PROBABLE SOURCE
+   ============================================================ */
+
 .source-label {
-  width: 175px;
+  width: 178px;
+  min-height: 54px;
 
   padding: 9px 11px;
 
-  border: 1px solid #1d6770;
-  background: rgba(4, 13, 17, 0.96);
+  background:
+    linear-gradient(
+      135deg,
+      rgba(7, 22, 28, 0.96),
+      rgba(4, 13, 18, 0.94)
+    );
+
+  border:
+    1px solid rgba(81, 220, 232, 0.65);
+
+  border-radius: 3px;
+
+  color: #dce4e8;
+
+  font-family: var(--os-ui);
+
+  box-shadow:
+    0 7px 18px rgba(0, 0, 0, 0.32),
+    inset 0 1px 0 rgba(255, 255, 255, 0.045);
 }
+
+
+/* source heading */
 
 .source-kicker {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 6px;
-  letter-spacing: 1.4px;
-  color: #64777e;
+  margin-bottom: 7px;
+
+  color: #719da5;
+
+  font-family: var(--os-mono);
+
+  font-size: 6.5px;
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
 }
 
-.source-row {
-  margin-top: 6px;
 
+/* source row */
+
+.source-row {
   display: flex;
   align-items: center;
+
   gap: 7px;
 
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--os-mono);
+
   font-size: 8px;
-  color: #d3dfe2;
+
+  letter-spacing: 0.03em;
+}
+
+.source-vessel {
+  flex: 1;
+
+  overflow: hidden;
+
+  color: #dce4e8;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
 }
 
 .source-row strong {
-  margin-left: auto;
-  color: var(--amber);
+  color: #ffad19;
+
+  font-family: var(--os-mono);
+
+  font-size: 9px;
+  font-weight: 600;
 }
 
 .source-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
+
+  flex: 0 0 6px;
+
   border-radius: 50%;
-  background: var(--cyan);
+
+  background: #51dce8;
+
+  box-shadow:
+    0 0 0 2px rgba(81, 220, 232, 0.12),
+    0 0 8px rgba(81, 220, 232, 0.45);
 }
 
-/* =====================================================
-   LEGEND
-===================================================== */
 
-.map-legend {
+/* ============================================================
+   SELECTED INCIDENT
+   ============================================================ */
+
+.map-incident-label {
   position: absolute;
-  bottom: 16px;
-  left: 16px;
 
-  z-index: 500;
+  top: 14px;
+  left: 56px;
 
-  padding: 10px 13px;
+  z-index: 800;
 
-  border: 1px solid #26363d;
-  background: rgba(4, 11, 15, 0.93);
+  width: 164px;
+
+  padding: 10px 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(232, 240, 243, 0.96),
+      rgba(211, 224, 229, 0.94)
+    );
+
+  border:
+    1px solid rgba(73, 105, 115, 0.36);
+
+  border-radius: 3px;
+
+  box-shadow:
+    0 7px 18px rgba(0, 0, 0, 0.18);
+
+  color: #24353d;
+
+  font-family: var(--os-mono);
+
+  pointer-events: none;
 }
 
-.legend-line {
+.map-incident-label .label-kicker {
+  margin-bottom: 5px;
+
+  color: #667d85;
+
+  font-family: var(--os-mono);
+
+  font-size: 6px;
+  font-weight: 600;
+
+  letter-spacing: 0.16em;
+}
+
+.map-incident-label .label-id {
+  color: #263c45;
+
+  font-family: var(--os-mono);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+}
+
+.map-incident-label .label-location {
+  margin-top: 2px;
+
+  color: #718089;
+
+  font-family: var(--os-ui);
+
+  font-size: 8px;
+}
+
+.map-incident-label .label-coords {
+  margin-top: 7px;
+  padding-top: 6px;
+
+  border-top:
+    1px solid rgba(55, 84, 94, 0.14);
+
+  color: #9a6714;
+
+  font-family: var(--os-mono);
+
+  font-size: 6px;
+
+  letter-spacing: 0.04em;
+}
+
+
+/* ============================================================
+   MAP UI TYPOGRAPHY
+   ============================================================ */
+
+.map-area {
+  font-family: var(--os-ui);
+}
+
+.map-area button {
+  font-family: var(--os-ui);
+}
+
+.map-area .map-legend,
+.map-area .wind-indicator,
+.map-area .leaflet-control-attribution {
+  font-family: var(--os-mono);
+}
+/* ============================================================
+   OSIRIS — LIGHT MAP ANNOTATIONS
+   ============================================================ */
+
+/* Remove the old dark visual treatment */
+
+.spill-label-icon,
+.source-label-icon {
+  filter:
+    drop-shadow(0 4px 8px rgba(32, 52, 61, 0.24))
+    drop-shadow(0 1px 2px rgba(32, 52, 61, 0.20));
+}
+
+
+/* ============================================================
+   OIL SLICK DETECTION
+   ============================================================ */
+
+.spill-label {
+  width: 174px;
+  min-height: 82px;
+
+  padding: 11px 13px 10px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(248, 251, 252, 0.97),
+      rgba(224, 234, 238, 0.97)
+    );
+
+  border: 1px solid #d38a17;
+  border-radius: 3px;
+
+  color: #30434d;
+
+  font-family: var(--os-ui);
+
+  box-shadow:
+    0 8px 20px rgba(30, 48, 56, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+
+/* connector */
+
+.spill-label::after {
+  background: #e1ebee;
+
+  border-right: 1px solid #d38a17;
+  border-bottom: 1px solid #d38a17;
+}
+
+
+/* ============================================================
+   OIL SLICK TEXT
+   ============================================================ */
+
+.spill-label-kicker {
+  color: #8b641c;
+
+  font-family: var(--os-mono);
+
+  font-size: 7px;
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+
+  text-transform: uppercase;
+}
+
+.spill-warning {
+  color: #d38a17;
+}
+
+.spill-label-area {
+  color: #263b45;
+
+  font-family: var(--os-mono);
+
+  font-size: 17px;
+  font-weight: 500;
+
+  line-height: 1.1;
+}
+
+.spill-label-time {
+  color: #71828a;
+
+  font-family: var(--os-mono);
+
+  font-size: 6.5px;
+
+  letter-spacing: 0.04em;
+}
+
+
+/* ============================================================
+   PROBABLE SOURCE
+   ============================================================ */
+
+.source-label {
+  width: 178px;
+  min-height: 54px;
+
+  padding: 9px 11px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(248, 251, 252, 0.97),
+      rgba(224, 234, 238, 0.97)
+    );
+
+  border: 1px solid #4a9eaa;
+  border-radius: 3px;
+
+  color: #30434d;
+
+  font-family: var(--os-ui);
+
+  box-shadow:
+    0 8px 20px rgba(30, 48, 56, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+
+/* ============================================================
+   SOURCE TEXT
+   ============================================================ */
+
+.source-kicker {
+  color: #587c84;
+
+  font-family: var(--os-mono);
+
+  font-size: 6.5px;
+  font-weight: 600;
+
+  letter-spacing: 0.14em;
+}
+
+.source-row {
+  font-family: var(--os-mono);
+}
+
+.source-vessel {
+  color: #30434d;
+}
+
+.source-row strong {
+  color: #b57912;
+}
+
+.source-dot {
+  background: #1798ad;
+
+  box-shadow:
+    0 0 0 2px rgba(23, 152, 173, 0.13),
+    0 0 7px rgba(23, 152, 173, 0.28);
+}
+/* ============================================================
+   OSIRIS — MAP LAYERS PANEL
+   ============================================================ */
+
+.map-layer-panel {
+  position: absolute;
+
+  left: 14px;
+  bottom: 14px;
+
+  z-index: 900;
+
+  width: 164px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(245, 249, 250, 0.97),
+      rgba(220, 231, 235, 0.96)
+    );
+
+  border: 1px solid rgba(92, 117, 126, 0.42);
+
+  border-radius: 3px;
+
+  box-shadow:
+    0 7px 18px rgba(25, 43, 51, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+
+  color: #30434d;
+
+  font-family: var(--os-ui);
+
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.map-layer-header {
+  width: 100%;
+
   display: flex;
   align-items: center;
-  gap: 9px;
+  justify-content: space-between;
 
-  height: 16px;
+  padding: 7px 9px;
 
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 7px;
-  letter-spacing: 1px;
-  color: #78868c;
-}
+  border: 0;
 
-.legend-symbol {
-  width: 21px;
-  height: 2px;
-  display: block;
-}
-
-.legend-symbol.oil {
-  background: var(--amber);
-}
-
-.legend-symbol.ais {
-  background: var(--cyan);
-}
-
-.legend-symbol.forecast {
-  background: repeating-linear-gradient(
-    90deg,
-    var(--amber) 0 5px,
-    transparent 5px 9px
-  );
-}
-
-.legend-symbol.source {
-  height: 7px;
   background: transparent;
-  border: 1px dashed var(--amber);
+
+  color: #40545d;
+
+  font-family: var(--os-ui);
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
 }
 
-/* =====================================================
-   INTELLIGENCE PANEL
-===================================================== */
+.map-layer-header svg {
+  transition: transform 140ms ease;
+}
+
+.map-layer-header svg.collapsed {
+  transform: rotate(180deg);
+}
+
+
+/* ============================================================
+   OPTIONS
+   ============================================================ */
+
+.map-layer-options {
+  padding: 1px 8px 8px;
+}
+
+.layer-option {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 24px;
+
+  gap: 6px;
+
+  color: #536871;
+
+  font-family: var(--os-ui);
+
+  font-size: 7px;
+
+  cursor: pointer;
+
+  user-select: none;
+}
+
+.layer-option:hover {
+  color: #30434d;
+}
+
+.layer-option input {
+  position: absolute;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   CHECKBOX
+   ============================================================ */
+
+.layer-checkbox {
+  position: relative;
+
+  width: 12px;
+  height: 12px;
+
+  flex: 0 0 12px;
+
+  border: 1px solid #9baeb5;
+
+  border-radius: 2px;
+
+  background: rgba(248, 251, 252, 0.75);
+}
+
+
+/* checked state */
+
+.layer-option input:checked + .layer-checkbox {
+  border-color: #277ba3;
+
+  background: #277ba3;
+}
+
+
+/* check mark */
+
+.layer-option input:checked + .layer-checkbox::after {
+  content: "";
+
+  position: absolute;
+
+  left: 3px;
+  top: 1px;
+
+  width: 3px;
+  height: 6px;
+
+  border-right: 1.5px solid white;
+  border-bottom: 1.5px solid white;
+
+  transform: rotate(45deg);
+}
+
+
+/* ============================================================
+   LAYER SYMBOLS
+   ============================================================ */
+
+.layer-detection,
+.layer-oil,
+.layer-lane,
+.layer-eez {
+  width: 11px;
+  height: 7px;
+
+  flex: 0 0 11px;
+}
+
+
+/* satellite detection */
+
+.layer-detection {
+  border: 1px solid #51dce8;
+
+  background:
+    rgba(81, 220, 232, 0.18);
+
+  border-radius: 50%;
+}
+
+
+/* oil */
+
+.layer-oil {
+  border: 1px dashed #ff6657;
+
+  background:
+    rgba(255, 102, 87, 0.08);
+}
+
+
+/* shipping lane */
+
+.layer-lane {
+  height: 1px;
+
+  border-top: 1px dashed #277ba3;
+}
+
+
+/* EEZ */
+
+.layer-eez {
+  height: 1px;
+
+  border-top: 1px dashed #718089;
+}
+
+
+/* ship icon */
+
+.layer-option > svg {
+  color: #277ba3;
+
+  flex: 0 0 11px;
+}
+
+
+/* ============================================================
+   WHEN PANEL IS CLOSED
+   ============================================================ */
+
+.map-layer-panel.closed {
+  width: 116px;
+}
+
+.map-layer-panel.closed .map-layer-header {
+  padding-right: 8px;
+}

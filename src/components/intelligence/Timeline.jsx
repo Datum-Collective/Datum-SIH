@@ -1,4 +1,4 @@
-import { Activity, ArrowLeft, ArrowRight } from "lucide-react";
+import { Activity, ArrowLeft } from "lucide-react";
 
 export default function Timeline({
   incident,
@@ -70,25 +70,6 @@ export default function Timeline({
         ))}
 
       </div>
-
-      <div className="forecast-model">
-
-        <span>FORECAST MODEL</span>
-        <strong>GNOME</strong>
-        <small>
-          Run 02 Jun 2025 14:00 UTC
-        </small>
-
-      </div>
-
-      <button
-        className="impact-assessment-button"
-        onClick={onImpact}
-      >
-        <Activity size={15} />
-        IMPACT ASSESSMENT
-        <ArrowRight size={15} />
-      </button>
 
     </div>
   );

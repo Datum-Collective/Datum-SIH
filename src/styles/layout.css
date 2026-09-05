@@ -1,312 +1,731 @@
-/* =====================================================
+/* ============================================================
+   OSIRIS
+   LAYOUT / WORKSTATION CHROME
+   ============================================================ */
+
+/* ============================================================
+   APPLICATION
+   ============================================================ */
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  min-width: 1100px;
+
+  display: grid;
+  grid-template-rows: var(--topbar-height) 1fr var(--intel-height);
+
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      #eef0ee 0%,
+      var(--os-bg) 100%
+    );
+
+  color: var(--os-text);
+}
+
+
+/* ============================================================
    TOP BAR
-===================================================== */
+   ============================================================ */
 
 .topbar {
-  height: 52px;
-  border-bottom: 1px solid var(--line);
-  background: #04090c;
+  position: relative;
+  z-index: 1000;
+
+  height: var(--topbar-height);
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 16px;
+  padding: 0 14px 0 12px;
 
-  position: relative;
-  z-index: 1000;
+  border-bottom: 1px solid #151d20;
+
+  background:
+    linear-gradient(
+      180deg,
+      #3a4448 0%,
+      #2b3438 46%,
+      #222b2f 100%
+    );
+
+  color: #edf2f2;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 2px 5px rgba(20, 27, 30, 0.22);
+}
+
+
+/* ============================================================
+   BRAND
+   ============================================================ */
+
+.topbar-left {
+  min-width: 390px;
+
+  display: flex;
+  align-items: center;
 }
 
 .brand {
   display: flex;
   align-items: center;
-  gap: 11px;
-  min-width: 310px;
+  gap: 12px;
 }
 
 .brand-mark {
-  width: 34px;
-  height: 34px;
-
-  border: 1px solid #304149;
+  width: 40px;
+  height: 40px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  color: var(--amber);
+  border: 1px solid #68767a;
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #4a565a 0%,
+      #303a3e 100%
+    );
+
+  color: #72c3cc;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 1px 2px rgba(0, 0, 0, 0.25);
+}
+
+.brand-copy {
+  display: flex;
+  flex-direction: column;
 }
 
 .brand-name {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 16px;
-  letter-spacing: 4px;
-  color: #e5ebed;
-}
+  font-family: var(--font-ui);
+  font-size: 20px;
+  line-height: 20px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
 
-.brand-name span {
-  color: var(--amber);
+  color: #f5f7f6;
 }
 
 .brand-subtitle {
-  margin-top: 2px;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 7px;
-  letter-spacing: 1.5px;
-  color: #68777f;
+  margin-top: 3px;
+
+  font-family: var(--font-system);
+  font-size: 8px;
+  line-height: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+
+  color: #aab5b8;
 }
+
+.topbar-divider {
+  width: 1px;
+  height: 28px;
+
+  margin: 0 19px;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      #69767a 25%,
+      #69767a 75%,
+      transparent
+    );
+}
+
+.workspace-title {
+  font-family: var(--font-system);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  color: #bfc8ca;
+}
+
+
+/* ============================================================
+   SYSTEM STATUS
+   ============================================================ */
 
 .system-status {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+
+  height: 30px;
+
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 11px;
 
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  color: #85939a;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+
+  white-space: nowrap;
 }
 
-.system-status i {
-  width: 1px;
-  height: 15px;
-  background: #27343a;
+.system-state {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
-.system-status .live-dot {
-  width: 7px;
-  height: 7px;
+.live-dot {
+  width: 8px;
+  height: 8px;
+
   border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 12px rgba(81, 220, 232, 0.8);
+
+  background: var(--os-aqua-bright);
+
+  box-shadow:
+    0 0 0 2px rgba(105, 197, 207, 0.15);
 }
+
+.system-live {
+  color: #8bd2d8;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+}
+
+.system-separator {
+  width: 1px;
+  height: 14px;
+
+  margin: 0 2px;
+
+  background: #566267;
+}
+
+.system-label {
+  color: #909c9f;
+  letter-spacing: 0.08em;
+}
+
+.system-value {
+  color: #d2d9da;
+  font-variant-numeric: tabular-nums;
+}
+
+
+/* ============================================================
+   TOP ACTIONS
+   ============================================================ */
 
 .top-actions {
-  min-width: 310px;
+  min-width: 390px;
 
   display: flex;
-  align-items: center;
   justify-content: flex-end;
-  gap: 10px;
-
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 9px;
-  letter-spacing: 1.3px;
-  color: #69777e;
+  align-items: center;
+  gap: 6px;
 }
 
-.top-actions button {
-  width: 32px;
+.operator-button,
+.top-icon-button {
   height: 32px;
 
-  border: 1px solid var(--line);
-  background: #071015;
-  color: #8a989e;
+  border: 1px solid #68767a;
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #485459 0%,
+      #343e42 48%,
+      #2d363a 100%
+    );
+
+  color: #d7dede;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
+
+  transition:
+    background 100ms ease,
+    border-color 100ms ease,
+    transform 60ms ease,
+    box-shadow 60ms ease;
+}
+
+.operator-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 0 10px;
+
+  font-family: var(--font-system);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.top-icon-button {
+  width: 32px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  cursor: pointer;
 }
 
-.hamburger {
-  font-size: 17px;
+.operator-button:hover,
+.top-icon-button:hover {
+  border-color: #82bbc0;
+
+  background:
+    linear-gradient(
+      180deg,
+      #536064 0%,
+      #3b474b 50%,
+      #344044 100%
+    );
+
+  color: #ffffff;
 }
 
-/* =====================================================
+.operator-button:active,
+.top-icon-button:active {
+  transform: translateY(1px);
+
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.30);
+}
+
+.menu-glyph {
+  width: 13px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.menu-glyph i {
+  display: block;
+
+  width: 13px;
+  height: 1px;
+
+  background: #c8d0d2;
+}
+
+
+/* ============================================================
    WORKSPACE
-===================================================== */
+   ============================================================ */
 
 .workspace {
-  height: calc(100vh - 52px - 292px);
-  min-height: 430px;
+  min-height: 0;
 
   display: grid;
-  grid-template-columns: 232px minmax(0, 1fr);
+  grid-template-columns: var(--rail-width) minmax(0, 1fr);
 
-  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+
+  background: var(--os-recessed);
+
+  border-bottom: 1px solid var(--os-border-dark);
 }
 
-/* =====================================================
-   LEFT RAIL
-===================================================== */
+
+/* ============================================================
+   INCIDENT RAIL
+   ============================================================ */
 
 .incident-rail {
-  background: #050b0e;
-  border-right: 1px solid var(--line);
+  position: relative;
+  z-index: 10;
 
-  overflow-y: auto;
+  min-height: 0;
+
   overflow-x: hidden;
+  overflow-y: auto;
+
+  border-right: 1px solid var(--os-border-dark);
+
+  background:
+    linear-gradient(
+      90deg,
+      #e0e3e2 0%,
+      #e7e9e7 100%
+    );
+
+  box-shadow:
+    inset -1px 0 0 rgba(255, 255, 255, 0.75);
 }
 
-.rail-heading {
+
+/* ============================================================
+   RAIL HEADINGS
+   ============================================================ */
+
+.rail-section-heading {
   height: 39px;
 
-  padding: 0 15px;
-
-  border-bottom: 1px solid var(--line);
+  padding: 0 13px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  font-family: "IBM Plex Mono", monospace;
+  border-bottom: 1px solid var(--os-border);
+
+  background:
+    linear-gradient(
+      180deg,
+      #fafbfa 0%,
+      #e4e7e6 100%
+    );
+
+  color: #5d696d;
+
+  font-family: var(--font-system);
   font-size: 9px;
-  letter-spacing: 1.5px;
-  color: #718087;
+  font-weight: 600;
+  letter-spacing: 0.075em;
 }
 
-.rail-heading strong {
-  color: var(--amber);
-  font-size: 10px;
+.incident-count {
+  min-width: 25px;
+  height: 19px;
+
+  padding: 0 6px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--os-border);
+
+  border-radius: 3px;
+
+  background: #f7f8f7;
+
+  color: var(--os-graphite);
+
+  font-family: var(--font-mono);
+  font-size: 9px;
 }
+
+
+/* ============================================================
+   INCIDENT LIST
+   ============================================================ */
 
 .incident-list {
   width: 100%;
 }
 
 .incident-item {
-  width: 100%;
-  min-height: 103px;
+  position: relative;
 
-  padding: 15px 15px 13px;
+  width: 100%;
+  min-height: 104px;
+
+  padding: 13px 13px 12px 15px;
+
+  display: block;
 
   border: 0;
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--os-border);
 
-  background: transparent;
-  color: var(--text);
+  border-radius: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.50),
+      rgba(228, 232, 231, 0.40)
+    );
+
+  color: var(--os-text);
 
   text-align: left;
-  cursor: pointer;
 
-  position: relative;
+  box-shadow: none;
+
+  transition:
+    background 100ms ease,
+    box-shadow 100ms ease;
 }
 
 .incident-item:hover {
-  background: #081218;
+  background:
+    linear-gradient(
+      90deg,
+      #f6f8f7 0%,
+      #e8eceb 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
 }
 
 .incident-item.selected {
-  background: #091419;
+  background:
+    linear-gradient(
+      90deg,
+      #f9fbfa 0%,
+      #e5efef 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
 }
 
 .incident-item.selected::before {
   content: "";
+
   position: absolute;
+
+  left: 0;
   top: 0;
   bottom: 0;
-  left: 0;
+
   width: 3px;
-  background: var(--amber);
+
+  background: var(--os-aqua);
+
+  box-shadow:
+    1px 0 2px rgba(74, 168, 181, 0.18);
 }
+
+
+/* ============================================================
+   INCIDENT CONTENT
+   ============================================================ */
 
 .incident-top {
   display: flex;
   align-items: center;
-  gap: 9px;
+
+  gap: 8px;
 }
 
 .severity-dot {
   width: 7px;
   height: 7px;
+
+  flex: 0 0 7px;
+
   border-radius: 50%;
 }
 
 .severity-dot.HIGH {
-  background: var(--red);
+  background: var(--os-red);
 }
 
 .severity-dot.MED {
-  background: var(--amber);
+  background: var(--os-amber);
 }
 
 .severity-dot.LOW {
-  background: var(--green);
+  background: var(--os-green);
 }
 
 .incident-id {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 12px;
-  letter-spacing: 1px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.045em;
+
+  color: var(--os-graphite);
 }
 
 .severity {
   margin-left: auto;
 
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 9px;
-  letter-spacing: 1px;
+  font-family: var(--font-system);
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 0.08em;
 }
 
 .severity.HIGH {
-  color: var(--red);
+  color: var(--os-red);
 }
 
 .severity.MED {
-  color: var(--amber);
+  color: var(--os-amber);
 }
 
 .severity.LOW {
-  color: var(--green);
+  color: var(--os-green);
 }
 
 .incident-location {
-  margin-top: 15px;
+  margin-top: 14px;
 
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-ui);
   font-size: 9px;
-  letter-spacing: 0.6px;
+  line-height: 1.25;
+  font-weight: 500;
 
-  color: #849198;
+  color: #435055;
 }
 
 .incident-meta {
-  margin-top: 15px;
-
-  display: flex;
-  justify-content: space-between;
-
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 8px;
-  color: #59676e;
-}
-
-.incident-meta strong {
-  color: #bdc8cc;
-  font-weight: 400;
-}
-
-.data-streams {
-  margin-top: 2px;
-}
-
-.data-stream {
-  height: 38px;
-
-  padding: 0 15px;
+  margin-top: 12px;
 
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: space-between;
 
-  color: #66757d;
-
-  font-family: "IBM Plex Mono", monospace;
+  font-family: var(--font-mono);
   font-size: 8px;
-  letter-spacing: 0.5px;
+  line-height: 1;
+
+  color: #899397;
+
+  letter-spacing: 0.035em;
 }
 
-.data-stream span {
+.incident-meta strong {
+  color: var(--os-graphite);
+  font-size: 9px;
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   DATA SOURCES
+   ============================================================ */
+
+.streams-section {
+  margin-top: 1px;
+}
+
+.data-streams {
+  padding-bottom: 8px;
+}
+
+.data-stream {
+  min-height: 38px;
+
+  padding: 0 13px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  border-bottom: 1px solid rgba(185, 194, 196, 0.72);
+
+  color: var(--os-graphite);
+
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.035em;
+}
+
+.data-stream-icon {
+  width: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--osiris-aqua);
+
+  opacity: 0.9;
+}
+
+.data-stream-name {
+  color: var(--os-graphite);
+
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.04em;
+
   white-space: nowrap;
 }
 
-.data-stream strong {
+.data-stream-status {
   margin-left: auto;
 
-  color: var(--cyan);
+  display: flex;
+  align-items: center;
+  gap: 5px;
 
-  font-size: 7px;
-  letter-spacing: 1px;
+  color: var(--osiris-aqua);
+
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+}
+
+.stream-dot {
+  width: 6px;
+  height: 6px;
+
+  flex: 0 0 6px;
+
+  border-radius: 50%;
+
+  background: var(--os-green);
+
+  box-shadow:
+    0 0 0 2px rgba(38, 155, 120, 0.12);
+}
+/* ============================================================
+   SHARED WORKSTATION PANELS
+   ============================================================ */
+
+.panel,
+.card {
+  border: 1px solid var(--os-border);
+  border-radius: var(--radius-md);
+
+  background: var(--os-surface);
+
+  box-shadow: var(--shadow-raised);
+}
+
+.panel-header,
+.section-header {
+  border-bottom: 1px solid var(--os-border);
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #e9eceb 100%
+    );
+}
+
+
+/* ============================================================
+   MACHINE READABLE DATA
+   ============================================================ */
+
+.coordinates,
+.timestamp,
+.identifier,
+.telemetry,
+.data-value,
+.metric-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
 }

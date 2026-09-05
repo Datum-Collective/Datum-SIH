@@ -1,6 +1,10 @@
 import { AlertTriangle } from "lucide-react";
+import { MatchBars } from "./DetectionPanel";
 
-export default function EvidenceModal({ incident, onClose }) {
+export default function EvidenceModal({
+  incident,
+  onClose,
+}) {
   return (
     <div
       className="modal-backdrop"
@@ -55,6 +59,16 @@ export default function EvidenceModal({ incident, onClose }) {
 
         </div>
 
+        <div className="evidence-analysis">
+
+          <span className="evidence-section-label">
+            VESSEL MATCH ANALYSIS
+          </span>
+
+          <MatchBars incident={incident} />
+
+        </div>
+
         <div className="evidence-note">
 
           <AlertTriangle size={16} />
@@ -82,6 +96,7 @@ export default function EvidenceModal({ incident, onClose }) {
         </button>
 
       </div>
+
     </div>
   );
 }

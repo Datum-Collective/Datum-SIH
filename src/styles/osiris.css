@@ -1,0 +1,448 @@
+/* ============================================================
+   OSIRIS
+   Maritime Environmental Intelligence
+   Global visual system
+   ============================================================ */
+
+/* ============================================================
+   APPLICATION SHELL
+   ============================================================ */
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  min-width: 1100px;
+  display: grid;
+  grid-template-rows: var(--topbar-height) 1fr;
+  overflow: hidden;
+  background:
+    linear-gradient(
+      180deg,
+      #eef0ee 0%,
+      var(--osiris-bg) 100%
+    );
+  color: var(--osiris-text);
+}
+
+/* ============================================================
+   WORKSPACE
+   ============================================================ */
+
+.workspace {
+  position: relative;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: var(--rail-width) minmax(0, 1fr);
+  overflow: hidden;
+  background: var(--osiris-recessed);
+}
+
+/* ============================================================
+   GENERIC PROFESSIONAL DESKTOP CONTROLS
+   ============================================================ */
+
+button {
+  border: 1px solid var(--osiris-border);
+  border-radius: var(--radius-sm);
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f0f2f1 48%,
+      #e1e5e4 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 1px 2px rgba(32, 40, 44, 0.10);
+
+  cursor: pointer;
+  transition:
+    background 100ms ease,
+    border-color 100ms ease,
+    box-shadow 100ms ease,
+    transform 60ms ease;
+}
+
+button:hover {
+  border-color: var(--osiris-aqua);
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f4f7f6 50%,
+      #e5eeee 100%
+    );
+}
+
+button:active {
+  transform: translateY(1px);
+  box-shadow:
+    var(--shadow-pressed);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: default;
+  transform: none;
+}
+
+/* ============================================================
+   COMMON PANEL LANGUAGE
+   ============================================================ */
+
+.panel,
+.card {
+  border: 1px solid var(--osiris-border);
+  border-radius: var(--radius-md);
+  background: var(--osiris-surface);
+  box-shadow: var(--shadow-raised);
+}
+
+.panel-header,
+.section-header {
+  border-bottom: 1px solid var(--osiris-border);
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #eef1f0 100%
+    );
+}
+
+/* ============================================================
+   MACHINE / TELEMETRY TEXT
+   ============================================================ */
+
+.mono,
+.coordinates,
+.timestamp,
+.identifier,
+.telemetry,
+.data-value,
+.metric-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================
+   STATUS SEMANTICS
+   ============================================================ */
+
+.status-live {
+  color: var(--osiris-aqua);
+}
+
+.status-info {
+  color: var(--osiris-blue);
+}
+
+.status-normal {
+  color: var(--osiris-green);
+}
+
+.status-warning {
+  color: var(--osiris-amber);
+}
+
+.status-critical {
+  color: var(--osiris-red);
+}
+
+/* ============================================================
+   FINE UTILITY LABELS
+   ============================================================ */
+
+.eyebrow,
+.kicker,
+.section-label,
+.panel-kicker {
+  font-family: var(--font-system);
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--osiris-secondary);
+}
+
+/* ============================================================
+   OSIRIS ACTIVE INDICATOR
+   ============================================================ */
+
+.osiris-active-indicator {
+  position: relative;
+}
+
+.osiris-active-indicator::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--osiris-aqua);
+}
+
+/* ============================================================
+   LIVE INDICATOR
+   ============================================================ */
+
+.osiris-live-dot {
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: var(--osiris-aqua);
+  box-shadow:
+    0 0 0 2px rgba(74, 168, 181, 0.15);
+}
+
+/* ============================================================
+   SELECTION
+   ============================================================ */
+
+::selection {
+  background: rgba(74, 168, 181, 0.20);
+  color: var(--osiris-graphite);
+}
+.osiris-ais-canvas {
+  pointer-events: auto;
+  display: block;
+}
+
+.osiris-vessel-popup-container .leaflet-popup-content {
+  margin: 0;
+}
+
+.osiris-vessel-popup-container .leaflet-popup-content-wrapper {
+  padding: 0;
+}
+
+.osiris-vessel-popup-container .leaflet-popup-tip {
+  box-shadow: none;
+}
+
+/* ============================================================
+   OSIRIS AIS VESSEL CARD
+   ============================================================ */
+
+.map-area
+.osiris-vessel-popup-container
+.leaflet-popup-content-wrapper {
+  padding: 0 !important;
+
+  border: 1px solid var(--osiris-border) !important;
+  border-radius: 8px !important;
+
+  background: rgba(237, 242, 244, 0.97) !important;
+
+  box-shadow:
+    0 8px 22px rgba(32, 40, 44, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+
+  overflow: hidden !important;
+}
+
+.map-area
+.osiris-vessel-popup-container
+.leaflet-popup-content {
+  width: 250px !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: var(--osiris-text) !important;
+
+  font-family: var(--font-system) !important;
+  font-size: 11px !important;
+}
+
+.map-area
+.osiris-vessel-popup-container
+.leaflet-popup-tip {
+  background: rgba(237, 242, 244, 0.97) !important;
+
+  border: 0 !important;
+
+  box-shadow: none !important;
+}
+
+.map-area
+.osiris-vessel-popup-container
+.leaflet-popup-close-button {
+  top: 7px !important;
+  right: 8px !important;
+
+  width: 18px !important;
+  height: 18px !important;
+
+  padding: 0 !important;
+
+  color: var(--osiris-secondary) !important;
+
+  font-size: 15px !important;
+  line-height: 18px !important;
+
+  opacity: 0.8 !important;
+}
+
+
+/* ============================================================
+   CARD
+   ============================================================ */
+
+.osiris-ais-card {
+  width: 250px;
+  box-sizing: border-box;
+
+  padding: 12px 13px 12px;
+
+  background: transparent;
+
+  color: var(--osiris-graphite);
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.osiris-ais-card-header {
+  margin-bottom: 7px;
+}
+
+.osiris-ais-card-type {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  color: var(--osiris-secondary);
+
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.13em;
+  line-height: 1;
+
+  text-transform: uppercase;
+}
+
+.osiris-ais-card-dot {
+  width: 6px;
+  height: 6px;
+
+  flex: 0 0 6px;
+
+  border-radius: 50%;
+
+  background: var(--osiris-aqua);
+
+  box-shadow:
+    0 0 0 2px rgba(74, 168, 181, 0.13),
+    0 0 5px rgba(74, 168, 181, 0.35);
+}
+
+
+/* ============================================================
+   VESSEL IDENTITY
+   ============================================================ */
+
+.osiris-ais-card-name {
+  color: var(--osiris-graphite);
+
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 600;
+
+  letter-spacing: 0.035em;
+  line-height: 1.15;
+
+  text-transform: uppercase;
+}
+
+.osiris-ais-card-mmsi {
+  margin-top: 3px;
+
+  color: var(--osiris-secondary);
+
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 500;
+
+  letter-spacing: 0.06em;
+}
+
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+
+.osiris-ais-card-rule {
+  height: 1px;
+
+  margin: 9px 0 7px;
+
+  background: var(--osiris-border);
+}
+
+
+/* ============================================================
+   DATA
+   ============================================================ */
+
+.osiris-ais-card-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.osiris-ais-card-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+
+  min-height: 19px;
+
+  gap: 14px;
+}
+
+.osiris-ais-card-row > span {
+  flex: 0 0 auto;
+
+  color: var(--osiris-secondary);
+
+  font-family: var(--font-mono);
+  font-size: 7px;
+  font-weight: 600;
+
+  letter-spacing: 0.09em;
+}
+
+.osiris-ais-card-row > strong {
+  flex: 1 1 auto;
+
+  color: var(--osiris-graphite);
+
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 0.015em;
+
+  text-align: right;
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   AIS CANVAS
+   ============================================================ */
+
+.osiris-ais-canvas {
+  display: block;
+
+  pointer-events: auto;
+}

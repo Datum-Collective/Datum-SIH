@@ -168,24 +168,16 @@
 ===================================================== */
 
 @media (max-height: 760px) {
-  .workspace {
-    height: calc(100vh - 52px - 265px);
-  }
-
-  .intel-panel {
-    height: 265px;
+  .detection-layout {
+    padding-top: 0;
+    padding-bottom: 0;
   }
 
   .intel-content {
-    height: 95px;
+    overflow: hidden;
   }
 
   .event-timeline {
-    height: 75px;
-  }
-
-  .detection-layout {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    overflow: hidden;
   }
 }
