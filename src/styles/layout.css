@@ -574,7 +574,7 @@
   margin-top: 14px;
 
   font-family: var(--font-ui);
-  font-size: 12px;
+  font-size: 9px;
   line-height: 1.25;
   font-weight: 500;
 
@@ -589,12 +589,12 @@
   justify-content: space-between;
 
   font-family: var(--font-mono);
-  font-size: 7px;
+  font-size: 8px;
   line-height: 1;
 
   color: #899397;
 
-  letter-spacing: 0.025em;
+  letter-spacing: 0.035em;
 }
 
 .incident-meta strong {
@@ -617,7 +617,7 @@
 }
 
 .data-stream {
-  min-height: 35px;
+  min-height: 38px;
 
   padding: 0 13px;
 
@@ -627,10 +627,13 @@
 
   border-bottom: 1px solid rgba(185, 194, 196, 0.72);
 
-  color: #68757a;
+  color: var(--os-graphite);
 
-  font-family: var(--font-system);
+  font-family: var(--font-mono);
   font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.035em;
 }
 
 .data-stream-icon {
@@ -640,10 +643,20 @@
   align-items: center;
   justify-content: center;
 
-  color: #6e7d81;
+  color: var(--osiris-aqua);
+
+  opacity: 0.9;
 }
 
 .data-stream-name {
+  color: var(--os-graphite);
+
+  font-family: var(--font-mono);
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 0.04em;
+
   white-space: nowrap;
 }
 
@@ -654,24 +667,28 @@
   align-items: center;
   gap: 5px;
 
-  color: var(--os-aqua);
+  color: var(--osiris-aqua);
 
   font-family: var(--font-mono);
-  font-size: 7px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
 }
 
 .stream-dot {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
+
+  flex: 0 0 6px;
 
   border-radius: 50%;
 
-  background: var(--os-aqua);
+  background: var(--os-green);
+
+  box-shadow:
+    0 0 0 2px rgba(38, 155, 120, 0.12);
 }
-
-
 /* ============================================================
    SHARED WORKSTATION PANELS
    ============================================================ */

@@ -211,7 +211,9 @@ export default function AISVessels({ visible = true }) {
      * Above map overlays but below Leaflet popups.
      */
     canvas.style.zIndex = "450";
-
+    canvas.style.display = visible
+  ? "block"
+  : "none";
     canvasRef.current = canvas;
 
     const mapContainer = map.getContainer();
@@ -615,6 +617,67 @@ export default function AISVessels({ visible = true }) {
       window.clearInterval(interval);
     };
   }, []);
+
+   /*
+   * Keep the AIS Canvas synchronized with
+   * the Vessel Tracks layer toggle.
+   *
+   * The Canvas is attached directly to the map
+   * container, so hiding the renderer alone is
+   * not enough. We must hide the actual Canvas.
+   */
+  useEffect(() => {
+    const canvas = canvasRef.current;
+
+    if (!canvas) {
+      return;
+    }
+
+    if (visible) {
+      canvas.style.display = "block";
+
+      redrawRequestedRef.current = true;
+    } else {
+      /*
+       * Hide the actual Canvas immediately.
+       */
+      canvas.style.display = "none";
+
+      /*
+       * Clear anything that was already painted
+       * onto the Canvas.
+       */
+      const context = contextRef.current;
+
+      if (context) {
+        const size = map.getSize();
+
+        context.clearRect(
+          0,
+          0,
+          size.x,
+          size.y
+        );
+      }
+
+      /*
+       * Remove vessel selection when AIS is disabled.
+       */
+      selectedMmsiRef.current = null;
+      selectedTrailRef.current = null;
+
+      /*
+       * Close an AIS vessel popup if one is open.
+       */
+      map.closePopup();
+
+      /*
+       * No stale Canvas redraw should remain queued.
+       */
+      redrawRequestedRef.current = false;
+    }
+  }, [visible, map]);
+
 
 /*
  * Keep the AIS canvas synchronized with Leaflet
