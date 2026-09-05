@@ -14,7 +14,8 @@
     55px
     42px
     39px
-    minmax(0, 1fr);
+    minmax(0, 1fr)
+    92px;
 
   overflow: hidden;
 
@@ -424,6 +425,56 @@
     );
 }
 
+.detection-layout {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(110px, 1fr))
+    minmax(240px, 2fr)
+    95px;
+
+  grid-template-rows: 100%;
+
+  gap: 8px;
+}
+
+.match-vessel {
+  min-width: 0;
+
+  padding: 7px 10px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border: 1px solid var(--os-border);
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #eef0ef 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.95),
+    0 1px 2px rgba(32,40,44,.07);
+}
+
+.match-bars {
+  display: none;
+}
+
+.evidence-button {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
 
 /* ============================================================
    GENERIC METRIC SURFACE
@@ -773,3 +824,391 @@
   background: #899598;
 }
 
+/* ============================================================
+   EVENT TIMELINE
+   ============================================================ */
+
+.event-timeline {
+  min-height: 0;
+  height: auto;
+
+  display: grid;
+
+  grid-template-columns:
+    105px
+    minmax(0, 1fr)
+    190px;
+
+  grid-template-rows:
+    1fr
+    30px;
+
+  column-gap: 14px;
+
+  padding: 7px 14px;
+
+  border-top: 1px solid #aeb8ba;
+
+  background:
+    linear-gradient(
+      180deg,
+      #e7ebea 0%,
+      #d8dedd 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+
+/* ------------------------------------------------------------
+   TIMELINE LABEL
+   ------------------------------------------------------------ */
+
+.timeline-label {
+  grid-column: 1;
+  grid-row: 1;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  font-family: var(--font-system);
+  font-size: 8px;
+  line-height: 1;
+
+  font-weight: 700;
+  letter-spacing: 0.08em;
+
+  color: var(--os-graphite);
+  text-transform: uppercase;
+}
+
+.timeline-label svg {
+  width: 12px;
+  height: 12px;
+
+  color: #718084;
+}
+
+
+/* ------------------------------------------------------------
+   TIMELINE CONTROLS
+   ------------------------------------------------------------ */
+
+.timeline-controls {
+  grid-column: 1;
+  grid-row: 2;
+
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.timeline-controls button {
+  width: 24px;
+  height: 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #aab5b7;
+  border-radius: 3px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f2f4f3 0%,
+      #dfe4e3 100%
+    );
+
+  color: #68767a;
+
+  cursor: pointer;
+}
+
+.timeline-controls button:hover {
+  background: #eef2f1;
+  color: var(--os-graphite);
+}
+
+
+/* ------------------------------------------------------------
+   TIMELINE TRACK
+   ------------------------------------------------------------ */
+
+.timeline {
+  grid-column: 2;
+  grid-row: 1;
+
+  position: relative;
+
+  min-width: 0;
+  min-height: 0;
+
+  display: flex;
+  align-items: center;
+}
+
+
+/* Base horizontal line */
+
+.timeline-base {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  top: 50%;
+
+  height: 1px;
+
+  background: #aeb8ba;
+
+  transform: translateY(-50%);
+}
+
+
+/* Progress */
+
+.timeline-progress {
+  position: absolute;
+
+  left: 0;
+  top: 50%;
+
+  height: 2px;
+
+  transform: translateY(-50%);
+
+  background: var(--os-aqua);
+
+  pointer-events: none;
+}
+
+
+/* ------------------------------------------------------------
+   TIMELINE POINTS
+   ------------------------------------------------------------ */
+
+.timeline-point {
+  position: relative;
+
+  flex: 1;
+
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #69767b;
+
+  cursor: pointer;
+}
+
+.timeline-point > span {
+  position: absolute;
+
+  top: calc(50% - 3px);
+
+  width: 6px;
+  height: 6px;
+
+  border: 1px solid #8f9b9e;
+  border-radius: 50%;
+
+  background: #e7ebea;
+
+  z-index: 2;
+}
+
+.timeline-point strong {
+  position: absolute;
+
+  bottom: calc(50% + 8px);
+
+  font-family: var(--font-mono);
+  font-size: 7px;
+  line-height: 1;
+
+  font-weight: 600;
+  letter-spacing: 0.03em;
+
+  white-space: nowrap;
+}
+
+.timeline-point small {
+  position: absolute;
+
+  top: calc(50% + 8px);
+
+  font-family: var(--font-mono);
+  font-size: 6px;
+  line-height: 1;
+
+  color: #879296;
+
+  white-space: nowrap;
+}
+
+.timeline-point:hover {
+  color: var(--os-graphite);
+}
+
+.timeline-point.active {
+  color: var(--os-graphite);
+}
+
+.timeline-point.active > span {
+  border-color: #a8751d;
+
+  background: var(--os-amber);
+
+  box-shadow:
+    0 0 0 2px rgba(215, 154, 45, 0.13);
+}
+
+.timeline-point.active small {
+  color: var(--os-graphite);
+}
+
+
+/* ------------------------------------------------------------
+   FORECAST MODEL
+   ------------------------------------------------------------ */
+
+.forecast-model {
+  grid-column: 2;
+  grid-row: 2;
+
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  overflow: hidden;
+
+  white-space: nowrap;
+
+  font-family: var(--font-mono);
+  font-size: 7px;
+  line-height: 1;
+
+  color: #69767a;
+  letter-spacing: 0.04em;
+}
+
+.forecast-model span {
+  flex: 0 0 auto;
+
+  font-family: var(--font-system);
+  font-size: 7px;
+  font-weight: 700;
+
+  letter-spacing: 0.07em;
+
+  color: #788589;
+}
+
+.forecast-model strong {
+  flex: 0 0 auto;
+
+  color: var(--os-graphite);
+
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.forecast-model small {
+  min-width: 0;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  font-family: var(--font-mono);
+  font-size: 7px;
+
+  color: #7b878b;
+}
+
+
+/* ------------------------------------------------------------
+   IMPACT ASSESSMENT
+   ------------------------------------------------------------ */
+
+.impact-assessment-button {
+  grid-column: 3;
+  grid-row: 2;
+
+  width: 100%;
+  height: 24px;
+
+  align-self: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 0 8px;
+
+  border: 1px solid #9eaaad;
+  border-radius: 3px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #eef1f0 0%,
+      #dce2e1 100%
+    );
+
+  color: #536166;
+
+  font-family: var(--font-system);
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.055em;
+
+  text-transform: uppercase;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+
+  cursor: pointer;
+}
+
+.impact-assessment-button:hover {
+  background:
+    linear-gradient(
+      180deg,
+      #f5f7f6 0%,
+      #e2e9e8 100%
+    );
+
+  color: var(--os-graphite);
+}
+
+.impact-assessment-button:active {
+  transform: translateY(1px);
+}
+
+.impact-assessment-button svg:first-child {
+  color: var(--os-blue);
+}
+
+.impact-assessment-button svg:last-child {
+  color: #899598;
+}
