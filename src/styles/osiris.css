@@ -207,3 +207,19 @@ button:disabled {
   background: rgba(74, 168, 181, 0.20);
   color: var(--osiris-graphite);
 }
+.osiris-ais-canvas {
+  pointer-events: auto;
+  display: block;
+}
+
+.osiris-vessel-popup-container .leaflet-popup-content {
+  margin: 0;
+}
+
+.osiris-vessel-popup-container .leaflet-popup-content-wrapper {
+  padding: 0;
+}
+
+.osiris-vessel-popup-container .leaflet-popup-tip {
+  box-shadow: none;
+}

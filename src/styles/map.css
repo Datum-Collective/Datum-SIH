@@ -1054,3 +1054,246 @@
     0 0 0 2px rgba(23, 152, 173, 0.13),
     0 0 7px rgba(23, 152, 173, 0.28);
 }
+/* ============================================================
+   OSIRIS — MAP LAYERS PANEL
+   ============================================================ */
+
+.map-layer-panel {
+  position: absolute;
+
+  left: 14px;
+  bottom: 14px;
+
+  z-index: 900;
+
+  width: 164px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(245, 249, 250, 0.97),
+      rgba(220, 231, 235, 0.96)
+    );
+
+  border: 1px solid rgba(92, 117, 126, 0.42);
+
+  border-radius: 3px;
+
+  box-shadow:
+    0 7px 18px rgba(25, 43, 51, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+
+  color: #30434d;
+
+  font-family: var(--os-ui);
+
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.map-layer-header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 7px 9px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #40545d;
+
+  font-family: var(--os-ui);
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.05em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+}
+
+.map-layer-header svg {
+  transition: transform 140ms ease;
+}
+
+.map-layer-header svg.collapsed {
+  transform: rotate(180deg);
+}
+
+
+/* ============================================================
+   OPTIONS
+   ============================================================ */
+
+.map-layer-options {
+  padding: 1px 8px 8px;
+}
+
+.layer-option {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  min-height: 24px;
+
+  gap: 6px;
+
+  color: #536871;
+
+  font-family: var(--os-ui);
+
+  font-size: 7px;
+
+  cursor: pointer;
+
+  user-select: none;
+}
+
+.layer-option:hover {
+  color: #30434d;
+}
+
+.layer-option input {
+  position: absolute;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   CHECKBOX
+   ============================================================ */
+
+.layer-checkbox {
+  position: relative;
+
+  width: 12px;
+  height: 12px;
+
+  flex: 0 0 12px;
+
+  border: 1px solid #9baeb5;
+
+  border-radius: 2px;
+
+  background: rgba(248, 251, 252, 0.75);
+}
+
+
+/* checked state */
+
+.layer-option input:checked + .layer-checkbox {
+  border-color: #277ba3;
+
+  background: #277ba3;
+}
+
+
+/* check mark */
+
+.layer-option input:checked + .layer-checkbox::after {
+  content: "";
+
+  position: absolute;
+
+  left: 3px;
+  top: 1px;
+
+  width: 3px;
+  height: 6px;
+
+  border-right: 1.5px solid white;
+  border-bottom: 1.5px solid white;
+
+  transform: rotate(45deg);
+}
+
+
+/* ============================================================
+   LAYER SYMBOLS
+   ============================================================ */
+
+.layer-detection,
+.layer-oil,
+.layer-lane,
+.layer-eez {
+  width: 11px;
+  height: 7px;
+
+  flex: 0 0 11px;
+}
+
+
+/* satellite detection */
+
+.layer-detection {
+  border: 1px solid #51dce8;
+
+  background:
+    rgba(81, 220, 232, 0.18);
+
+  border-radius: 50%;
+}
+
+
+/* oil */
+
+.layer-oil {
+  border: 1px dashed #ff6657;
+
+  background:
+    rgba(255, 102, 87, 0.08);
+}
+
+
+/* shipping lane */
+
+.layer-lane {
+  height: 1px;
+
+  border-top: 1px dashed #277ba3;
+}
+
+
+/* EEZ */
+
+.layer-eez {
+  height: 1px;
+
+  border-top: 1px dashed #718089;
+}
+
+
+/* ship icon */
+
+.layer-option > svg {
+  color: #277ba3;
+
+  flex: 0 0 11px;
+}
+
+
+/* ============================================================
+   WHEN PANEL IS CLOSED
+   ============================================================ */
+
+.map-layer-panel.closed {
+  width: 116px;
+}
+
+.map-layer-panel.closed .map-layer-header {
+  padding-right: 8px;
+}
