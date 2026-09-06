@@ -630,15 +630,19 @@ grid-template-rows:
    ============================================================ */
 
 .attribution-box {
-  width: 100%;
+  width: 90px;
   height: 100%;
 
-  padding: 7px 9px;
+  margin-left: auto;
+
+  padding: 7px 10px;
 
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
+
+  box-sizing: border-box;
 
   border: 1px solid #c9b37e;
   border-radius: 4px;
@@ -663,6 +667,8 @@ grid-template-rows:
   letter-spacing: 0.08em;
 
   color: #8a7c60;
+
+  text-align: right;
 }
 
 .attribution-box strong {
@@ -677,8 +683,9 @@ grid-template-rows:
   color: #9c6b16;
 
   font-variant-numeric: tabular-nums;
-}
 
+  text-align: right;
+}
 
 /* ============================================================
    EVIDENCE BUTTON
@@ -1374,12 +1381,45 @@ grid-template-rows:
 .vessel-main .attribution-box {
   margin-left: auto;
 
-  width: 78px;
-  min-width: 78px;
+  width: 68px;
+  min-width: 68px;
 
   height: 48px;
 
-  flex: 0 0 78px;
+  flex: 0 0 68px;
+
+  padding: 7px 9px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: center;
+
+  border: 1px solid #c9b37e;
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fffdf8,
+      #eee8da
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.90);
+}
+
+.vessel-main .attribution-box span {
+  width: 100%;
+  text-align: center;
+}
+
+.vessel-main .attribution-box strong {
+  width: 100%;
+  margin-top: 4px;
+  text-align: center;
 }
 
 /* ------------------------------------------------------------
