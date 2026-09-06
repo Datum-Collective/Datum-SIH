@@ -14,9 +14,9 @@ grid-template-rows:
   55px
   42px
   39px
-  minmax(0, 1fr)
+  minmax(58px, 1fr)
   92px;
-  overflow: auto;
+  overflow: hidden;
 
   border-top: 1px solid #8f999c;
 
@@ -1133,66 +1133,109 @@ grid-template-rows:
   color: var(--os-graphite);
 }
 
+/* ============================================================
+   FORECAST
+   ============================================================ */
 
-/* ------------------------------------------------------------
-   FORECAST MODEL
-   ------------------------------------------------------------ */
-
-.forecast-model {
-  grid-column: 2;
-  grid-row: 2;
-
+.forecast-panel {
+  width: 100%;
+  height: 100%;
   min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
 
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 
+  padding: 0 14px;
+
   overflow: hidden;
+}
+
+.forecast-card {
+  min-width: 0;
+  min-height: 0;
+  box-sizing: border-box;
+
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+
+  padding: 7px 14px !important;
+
+  border: 1px solid #aebabc;
+  border-radius: 4px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f7f9f8 0%,
+      #e5e9e8 100%
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9),
+    0 1px 2px rgba(32,40,44,.06);
+
+  overflow: hidden;
+}
+
+.forecast-card-header {
+  width: 100%;
+
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+
+  margin: 0 0 5px 0 !important;
+  padding: 0 !important;
+}
+
+.forecast-card-header span {
+  font-family: var(--font-system) !important;
+  font-size: 7px !important;
+  line-height: 8px !important;
+  font-weight: 700 !important;
+  letter-spacing: .08em !important;
+
+  color: #52656b !important;
 
   white-space: nowrap;
-
-  font-family: var(--font-mono);
-  font-size: 7px;
-  line-height: 1;
-
-  color: #69767a;
-  letter-spacing: 0.04em;
 }
 
-.forecast-model span {
-  flex: 0 0 auto;
+.forecast-card-header small {
+  font-family: var(--font-mono) !important;
+  font-size: 6px !important;
+  line-height: 7px !important;
 
-  font-family: var(--font-system);
-  font-size: 7px;
-  font-weight: 700;
+  color: #899598 !important;
 
-  letter-spacing: 0.07em;
-
-  color: #788589;
+  white-space: nowrap;
 }
 
-.forecast-model strong {
-  flex: 0 0 auto;
+.forecast-card .forecast-value {
+  display: block !important;
 
-  color: var(--os-graphite);
+  margin: 0 !important;
+  padding: 0 !important;
 
-  font-family: var(--font-mono);
-  font-size: 8px;
-  font-weight: 600;
-}
+  font-family: var(--font-mono) !important;
+  font-size: 14px !important;
+  line-height: 16px !important;
+  font-weight: 600 !important;
 
-.forecast-model small {
-  min-width: 0;
+  color: #30464d !important;
 
-  overflow: hidden;
+  opacity: 1 !important;
+  visibility: visible !important;
 
-  text-overflow: ellipsis;
+  position: relative !important;
+  z-index: 10 !important;
 
-  font-family: var(--font-mono);
-  font-size: 7px;
-
-  color: #7b878b;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
 }
 
 
@@ -1431,88 +1474,76 @@ grid-template-rows:
   height: 100%;
   min-width: 0;
   min-height: 0;
-
   box-sizing: border-box;
 
   display: grid;
-
-  grid-template-rows:
-    1fr
-    auto;
-
-  gap: 10px;
-
-  overflow: hidden;
-}
-
-
-/* ------------------------------------------------------------
-   FORECAST SUMMARY
-   ------------------------------------------------------------ */
-
-.forecast-summary {
-  min-width: 0;
-  min-height: 0;
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(5, minmax(0, 1fr));
-
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 
+  padding: 0 14px;
+
   overflow: hidden;
 }
 
-.forecast-summary > div {
+.forecast-card {
   min-width: 0;
   min-height: 0;
-
   box-sizing: border-box;
-
-  padding: 12px 14px;
 
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  border: 1px solid var(--os-border);
+  padding: 9px 14px;
+
+  border: 1px solid #aebabc;
   border-radius: 4px;
 
   background:
     linear-gradient(
       180deg,
-      #ffffff 0%,
-      #edf0ef 100%
+      #f7f9f8 0%,
+      #e5e9e8 100%
     );
 
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.95),
+    inset 0 1px 0 rgba(255,255,255,.9),
     0 1px 2px rgba(32,40,44,.06);
 
   overflow: hidden;
 }
+.forecast-card-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
 
-.forecast-summary .metric-label {
   margin-bottom: 7px;
+}
 
+.forecast-card-header span {
   font-family: var(--font-system);
   font-size: 8px;
   line-height: 1;
-
   font-weight: 700;
   letter-spacing: .08em;
 
-  color: #778589;
+  color: #66777c;
 }
 
-.forecast-summary strong {
-  display: block;
+.forecast-card-header small {
+  font-family: var(--font-mono);
+  font-size: 6px;
+  line-height: 1;
 
+  color: #899598;
+  white-space: nowrap;
+}
+
+.forecast-card > strong {
   font-family: var(--font-mono);
   font-size: 15px;
   line-height: 1;
-
   font-weight: 600;
 
   color: var(--os-graphite);
@@ -1522,457 +1553,14 @@ grid-template-rows:
   text-overflow: ellipsis;
 }
 
-.forecast-summary small {
-  display: block;
-
-  margin-top: 6px;
+.forecast-card-meta {
+  margin-top: 5px;
 
   font-family: var(--font-mono);
-  font-size: 8px;
+  font-size: 6.5px;
   line-height: 1;
 
   color: #899598;
-}
-
-.forecast-summary .forecast-status strong {
-  color: var(--os-aqua);
-}
-
-
-/* ------------------------------------------------------------
-   FORECAST PROJECTION
-   ------------------------------------------------------------ */
-
-.forecast-projection {
-  min-width: 0;
-  min-height: 0;
-
-  display: flex;
-  flex-direction: column;
-
-  border: 1px solid var(--os-border);
-  border-radius: 4px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #f8faf9 0%,
-      #e6ebea 100%
-    );
-
-  box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.9),
-    0 1px 2px rgba(32,40,44,.06);
-
-  overflow: hidden;
-}
-
-
-/* ------------------------------------------------------------
-   PROJECTION HEADER
-   ------------------------------------------------------------ */
-
-.projection-header {
-  min-height: 48px;
-
-  box-sizing: border-box;
-
-  padding: 0 15px;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  border-bottom: 1px solid var(--os-border);
-
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #edf1f0 100%
-    );
-}
-
-.projection-header > div {
-  min-width: 0;
-}
-
-.projection-header span {
-  display: block;
-
-  font-family: var(--font-system);
-  font-size: 8px;
-  line-height: 1;
-
-  font-weight: 700;
-  letter-spacing: .09em;
-
-  color: #788589;
-}
-
-.projection-header strong {
-  display: block;
-
-  margin-top: 6px;
-
-  font-family: var(--font-mono);
-  font-size: 14px;
-  line-height: 1;
-
-  font-weight: 600;
-
-  color: var(--os-graphite);
-}
-
-.projection-time {
-  font-family: var(--font-mono);
-  font-size: 9px;
-
-  color: #7d898d;
-
-  font-variant-numeric: tabular-nums;
-}
-
-
-/* ------------------------------------------------------------
-   PROJECTION TRACK
-   ------------------------------------------------------------ */
-
-.projection-track {
-  position: relative;
-
-  flex: 1;
-
-  min-width: 0;
-  min-height: 0;
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(5, minmax(0, 1fr));
-
-  align-items: stretch;
-
-  padding: 0 20px;
-}
-
-.projection-track::before {
-  content: "";
-
-  position: absolute;
-
-  left: 10%;
-  right: 10%;
-  top: 50%;
-
-  height: 2px;
-
-  background: #b8c2c3;
-
-  transform: translateY(-50%);
-}
-
-
-/* ------------------------------------------------------------
-   FORECAST STAGE
-   ------------------------------------------------------------ */
-
-.forecast-stage {
-  position: relative;
-
-  min-width: 0;
-  height: 100%;
-
-  box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  gap: 9px;
-
-  padding: 0;
-
-  border: 0;
-
-  background: transparent;
-
-  color: #7b888c;
-
-  cursor: pointer;
-}
-
-.forecast-stage-marker {
-  position: relative;
-  z-index: 2;
-
-  width: 14px;
-  height: 14px;
-
-  flex: 0 0 14px;
-
-  box-sizing: border-box;
-
-  border: 2px solid #aab7b9;
-  border-radius: 50%;
-
-  background: #eef2f1;
-
-  transition:
-    border-color 120ms ease,
-    background 120ms ease,
-    box-shadow 120ms ease,
-    transform 120ms ease;
-}
-
-.forecast-stage:hover {
-  color: var(--os-graphite);
-}
-
-.forecast-stage:hover .forecast-stage-marker {
-  border-color: var(--os-aqua);
-
-  transform: scale(1.08);
-}
-
-.forecast-stage.active {
-  color: var(--os-graphite);
-}
-
-.forecast-stage.active .forecast-stage-marker {
-  border-color: var(--os-aqua);
-
-  background: var(--os-aqua);
-
-  box-shadow:
-    0 0 0 4px rgba(53,199,216,.12),
-    0 1px 3px rgba(32,40,44,.14);
-}
-
-.forecast-stage div {
-  min-width: 0;
-
-  text-align: center;
-}
-
-.forecast-stage strong {
-  display: block;
-
-  font-family: var(--font-mono);
-  font-size: 10px;
-  line-height: 1;
-
-  font-weight: 600;
-
-  white-space: nowrap;
-}
-
-.forecast-stage small {
-  display: block;
-
-  margin-top: 6px;
-
-  font-family: var(--font-mono);
-  font-size: 8px;
-  line-height: 1;
-
-  color: #899598;
-
-  white-space: nowrap;
-
-  font-variant-numeric: tabular-nums;
-}
-
-.forecast-stage.active small {
-  color: #627276;
-}
-
-
-/* ------------------------------------------------------------
-   FORECAST FOOTER
-   ------------------------------------------------------------ */
-
-.forecast-footnote {
-  min-width: 0;
-
-  min-height: 30px;
-
-  display: flex;
-  align-items: center;
-
-  gap: 8px;
-
-  padding: 0 3px;
-
-  border-top: 1px solid #aeb8ba;
-
-  font-family: var(--font-mono);
-  font-size: 8px;
-  line-height: 1;
-
-  color: #7b888c;
-
-  letter-spacing: .04em;
-}
-
-.forecast-footnote strong {
-  color: var(--os-graphite);
-
-  font-weight: 600;
-}
-
-
-/* ------------------------------------------------------------
-   FORECAST TIMELINE
-   ------------------------------------------------------------ */
-
-.forecast-timeline {
-  min-width: 0;
-  min-height: 0;
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(5, minmax(0, 1fr));
-
-  border: 1px solid var(--os-border);
-  border-radius: 4px;
-
-  background:
-    linear-gradient(
-      180deg,
-      #f5f7f6 0%,
-      #e2e7e6 100%
-    );
-
-  overflow: hidden;
-}
-
-.forecast-timeline button {
-  position: relative;
-
-  min-width: 0;
-  height: 100%;
-
-  box-sizing: border-box;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  gap: 7px;
-
-  padding: 0 6px;
-
-  border: 0;
-  border-right: 1px solid #c8d0d0;
-
-  background: transparent;
-
-  color: #748186;
-
-  font-family: var(--font-mono);
-
-  cursor: pointer;
-
-  transition:
-    background 100ms ease,
-    color 100ms ease,
-    box-shadow 100ms ease;
-}
-
-.forecast-timeline button:last-child {
-  border-right: 0;
-}
-
-.forecast-timeline button:hover {
-  background: rgba(255,255,255,.48);
-
-  color: var(--os-graphite);
-}
-
-.forecast-timeline button.selected {
-  background:
-    linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #e8edec 100%
-    );
-
-  color: var(--os-graphite);
-
-  box-shadow:
-    inset 0 3px 0 var(--os-aqua);
-}
-
-.forecast-timeline button > span {
-  font-family: var(--font-mono);
-  font-size: 9px;
-  line-height: 1;
-
-  font-weight: 600;
-
-  letter-spacing: .04em;
-}
-
-.forecast-timeline button > small {
-  font-family: var(--font-mono);
-  font-size: 8px;
-  line-height: 1;
-
-  color: #899598;
-
-  font-variant-numeric: tabular-nums;
-}
-
-.forecast-timeline button.selected > small {
-  color: #627276;
-}
-
-
-/* ------------------------------------------------------------
-   FORECAST STATUS
-   ------------------------------------------------------------ */
-
-.forecast-status {
-  min-width: 0;
-
-  min-height: 34px;
-
-  display: flex;
-  align-items: center;
-
-  gap: 10px;
-
-  padding: 0 12px;
-
-  border-top: 1px solid #aeb8ba;
-
-  font-family: var(--font-mono);
-  font-size: 8px;
-
-  color: #7b888c;
-}
-
-.forecast-status > span {
-  font-family: var(--font-system);
-  font-size: 8px;
-
-  font-weight: 700;
-  letter-spacing: .07em;
-
-  color: #899598;
-}
-
-.forecast-status > strong {
-  font-family: var(--font-mono);
-  font-size: 9px;
-
-  font-weight: 600;
-
-  color: var(--os-graphite);
 }
 
 
@@ -2872,4 +2460,43 @@ grid-template-rows:
 
   box-shadow:
     0 0 5px rgba(53, 183, 197, 0.28);
+}
+
+
+
+/*--- BS FOR THAT DAMN FORECAST TAB BRUH*/
+
+.forecast-card .forecast-value {
+  display: block !important;
+
+  margin: 0 !important;
+
+  font-family: var(--font-mono) !important;
+  font-size: 15px !important;
+  line-height: 18px !important;
+  font-weight: 600 !important;
+
+  color: #30464d !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.forecast-card .forecast-card-meta {
+  display: block !important;
+
+  margin-top: 4px !important;
+
+  font-family: var(--font-mono) !important;
+  font-size: 7px !important;
+  line-height: 8px !important;
+
+  color: #7d8b8f !important;
+
+  opacity: 1 !important;
+  visibility: visible !important;
 }

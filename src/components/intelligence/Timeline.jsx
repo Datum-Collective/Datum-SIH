@@ -1,4 +1,5 @@
 import { Activity, ArrowLeft } from "lucide-react";
+
 export default function Timeline({
   incident,
   timelineStep,
@@ -69,17 +70,6 @@ export default function Timeline({
         ))}
 
       </div>
-
-      <div className="forecast-model">
-
-        <span>FORECAST MODEL</span>
-        <strong>GNOME</strong>
-        <small>
-          Run 02 Jun 2025 14:00 UTC
-        </small>
-
-      </div>
-
 
     </div>
   );
