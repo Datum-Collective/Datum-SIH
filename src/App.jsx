@@ -5,6 +5,7 @@ import "./App.css";
 import "./styles/oil-sentinel-theme.css";
 
 import { incidents } from "./data/incidents";
+import { liveOsirisIncident } from "./data/osiris/liveIncident";
 
 import TopBar from "./components/layout/TopBar";
 import IncidentRail from "./components/layout/IncidentRail";
@@ -14,7 +15,13 @@ import EvidenceModal from "./components/intelligence/EvidenceModal";
 import ImpactView from "./components/impact/ImpactView";
 
 export default function App() {
-  const [selectedIncident, setSelectedIncident] = useState(incidents[0]);
+  const demoIncidents = [
+    liveOsirisIncident,
+    ...incidents,
+  ];
+
+  const [selectedIncident, setSelectedIncident] =
+    useState(liveOsirisIncident);
   const [mapMode, setMapMode] = useState("chart");
   const [activeTab, setActiveTab] = useState("detection");
   const [showEvidence, setShowEvidence] = useState(false);
@@ -55,7 +62,7 @@ export default function App() {
 
       <main className="workspace">
         <IncidentRail
-          incidents={incidents}
+          incidents={demoIncidents}
           incident={incident}
           selectIncident={selectIncident}
         />

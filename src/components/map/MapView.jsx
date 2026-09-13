@@ -78,6 +78,8 @@ const eezBoundaries = [
 
 
 export default function MapView({
+
+
   incident,
   incidents,
   mapMode,
@@ -85,6 +87,13 @@ export default function MapView({
   selectIncident,
   mapCenter,
 }) {
+  console.log("[OSIRIS DEBUG]", {
+    incidentId: incident?.id,
+    polygonPoints: incident?.spillPolygon?.length,
+    firstPoint: incident?.spillPolygon?.[0],
+    lastPoint: incident?.spillPolygon?.[incident?.spillPolygon?.length - 1],
+    center: [incident?.lat, incident?.lng],
+  });
   const [layers, setLayers] = useState({
     vesselTracks: true,
     satelliteDetections: true,
@@ -211,13 +220,13 @@ export default function MapView({
             <Polygon
               positions={incident.spillPolygon}
               pathOptions={{
-                color: "#ff6657",
-                weight: 1.5,
-                opacity: 0.85,
-                fillColor: "#071116",
+                color: "#ff3b30",
+                weight: 4,
+                opacity: 1,
+                fillColor: "#ff3b30",
                 fillOpacity:
-                  mapMode === "satellite" ? 0.34 : 0.22,
-                dashArray: "3 4",
+                  mapMode === "satellite" ? 0.38 : 0.28,
+                dashArray: null,
                 lineCap: "round",
                 lineJoin: "round",
               }}
@@ -225,14 +234,13 @@ export default function MapView({
 
             <Circle
               center={[incident.lat, incident.lng]}
-              radius={24000}
+              radius={12000}
               pathOptions={{
                 color: "#8a3f3b",
-                weight: 1,
-                opacity: 0.35,
+                weight: 1.5,
+                opacity: 0.45,
                 fillColor: "#03080b",
-                fillOpacity:
-                  mapMode === "satellite" ? 0.16 : 0.09,
+                fillOpacity: 0,
               }}
             />
 
